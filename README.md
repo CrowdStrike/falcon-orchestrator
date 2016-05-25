@@ -3,8 +3,9 @@
 CrowdStrike Falcon Orchestrator is an extendable Windows-based application that provides workflow automation, case management and security response functionality.  The tool leverages the highly extensible APIs contained within the CrowdStrike Falcon Connect program.
 </p>
 
-For a brief overview of the project and demonstration of Falcon Orchestrator check out the following
-[video](https://www.youtube.com/watch?v=3Mi9L6na8G8) on YouTube.
+# Video Demonstration
+
+Check out the following [video](https://www.youtube.com/watch?v=3Mi9L6na8G8) on YouTube for a project overview and demonstration of Falcon Orchestrator.
 
 
 # Development
