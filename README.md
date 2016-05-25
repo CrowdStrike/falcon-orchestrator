@@ -7,6 +7,9 @@ CrowdStrike Falcon Orchestrator is an extendable Windows-based application that 
 
 Check out the following [video](https://www.youtube.com/watch?v=3Mi9L6na8G8) on YouTube for a project overview and demonstration of Falcon Orchestrator.
 
+# Getting Started
+
+Please refer to the [Wiki](https://github.com/CrowdStrike/falcon-orchestrator/wiki) page for instructions on installing and configuring the application.  You can download the installer through the [release](https://github.com/CrowdStrike/falcon-orchestrator/releases/download/v1.0.0/FalconOrchestratorSetup.msi) page.
 
 # Development
 
