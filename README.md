@@ -29,13 +29,13 @@ The solution is composed of 7 projects/modules, each providing specific function
 
  Name     | Type | Description
  ---------|------|-----------
-Client    | Windows Service | This is an ETL service that is responsible for connecting to the Falcon Host Streaming API, consuming detection events and executing the configured workflow logic against those events.
-DAL       | Class Library | Centralized library using Entity Framework for common database access related tasks
-Installer | Setup Project | WIX project used to build full application into an MSI installer for simplified deployment.
-LDAP      | Class Library | Centralized library for performing activity related to Active Directory integration.
-Forensics | Class Library | Centralized library that manages PowerShell's Remoting calls to execute pre-defined actions.
-IOC       | Class Library | Library managing calls to and from the Falcon Host Management API for indicators.
-Web       | ASP.NET Web Application | MVC based web application to provide user interface for interacting with the system.
+**Client**    | Windows Service | This is an ETL service that is responsible for connecting to the Falcon Host Streaming API, consuming detection events and executing the configured workflow logic against those events.
+**DAL**       | Class Library | Centralized library using Entity Framework for common database access related tasks
+**Installer** | Setup Project | WIX project used to build full application into an MSI installer for simplified deployment.
+**LDAP**      | Class Library | Centralized library for performing activity related to Active Directory integration.
+**Forensics** | Class Library | Centralized library that manages PowerShell's Remoting calls to execute pre-defined actions.
+**IOC**       | Class Library | Library managing calls to and from the Falcon Host Management API for indicators.
+**Web**       | ASP.NET Web Application | MVC based web application to provide user interface for interacting with the system.
 
 
 # Support
