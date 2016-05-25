@@ -3,11 +3,11 @@
 Falcon Orchestrator is a monolithic windows stack application that provides workflow automation, case management and security response functionality.  The tool leverages the highly extensible APIs contained within the Falcon Connect program.
 </p>
 
-## Development
+# Development
 
 Being a Windows based application, the tool was developed with the use of .NET 4.5, C#, ASP.NET MVC 4, Entity Framework and PowerShell.  If forking or cloning the repository, please note the code was written with Visual Studio 2015. Compatibility with earlier Visual Studio versions can be problematic.
 
-## Third Party Libraries
+# Third Party Libraries
 
 The following external libraries are used within the project.  These are not provided via the GitHub repository, if building from source you will need to right click on the solution file in Visual Studio and select _Restore NuGet Packages_.
 
@@ -20,7 +20,7 @@ The following external libraries are used within the project.  These are not pro
 * WIX
 
 
-## Project Structure
+# Project Structure
 
 The solution is composed of 7 projects/modules, each providing specific functionality to the overall application. Each project is prepended with the project name _FalconOrchestrator_.
 
@@ -35,10 +35,14 @@ IOC       | Class Library | Library managing calls to and from the Falcon Host M
 Web       | ASP.NET Web Application | MVC based web application to provide user interface for interacting with the system.
 
 
-## Support
+# Support
 
 As an open source project this software is not officially supported by CrowdStrike.  As such we ask that you please refrain from sending inquiries to the CrowdStrike support team.  The project maintainers will be working with active community contributors to address bugs and supply new features.
-If you have identified a bug please submit an issue through GitHub by following the contribution guidelines.  You can also post questions or start conversations on the project through our community forums site at [http://community.crowdstrike.com](http://community.crowdstrike.com)  
+If you have identified a bug please submit an issue through GitHub by following the contribution guidelines.  You can also post questions or start conversations on the project through our [community forums](http://community.crowdstrike.com) page.
+
+# Contribution
+
+Contribution is key to the successs of any open source project.  As such we highly recommend you get involved and help us to make the tool better for everyone!  For guidelines on contributing refer to [CONTRIBUTING.md](https://github.com/CrowdStrike/falcon-orchestrator/blob/master/CONTRIBUTING.md) 
 
 
 # License
