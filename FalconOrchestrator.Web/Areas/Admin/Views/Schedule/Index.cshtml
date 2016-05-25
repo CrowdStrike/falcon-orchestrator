@@ -1,0 +1,51 @@
+﻿@model List<FalconOrchestratorWeb.Areas.Admin.Models.ScheduleViewModel>
+
+@{
+    ViewBag.Title = "Admin - Schedule";
+}
+<div class="container box-shadow">
+@using (Ajax.BeginForm("index", "schedule", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <span class="fa fa-2x fa-edit"></span>
+        <span class="header">Rotation Schedule</span>
+        <hr />
+        <div id="result"></div>
+        <p>
+            Here's where you setup the schedule for which individual or group is responsible for reviewing and responding to falcon host detection events.
+            The system will refer to this schedule to automatically assign an event to the corresponding handler based on the date the event occured.
+        </p>
+        <br />
+        <div class="well">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                @Html.HiddenFor(x => x[i].ScheduleId)
+                @Html.HiddenFor(x => x[i].DayOfWeek)
+                <div class="form-group">
+                    <label class="control-label col-2" style="float:left">@Html.DisplayFor(x => x[i].DayOfWeek)</label>
+                    <div class="col-6">
+                        @Html.DropDownListFor(x => x[i].ResponderId, Model[i].ResponderList, String.Empty, new { @class = "form-control" })
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <div class="form-align">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+@section scripts{
+}
+
+@section styles{
+}
+
+

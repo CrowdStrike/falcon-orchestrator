@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Fragment>
+    <DirectoryRef Id="SERVICEFOLDER">
+      <Component Id="ServiceComponent" Guid="{5C5D4314-B445-4EA7-8565-8BEF13DC6C20}">
+        <File Id="FalconOrchestrator.Client.exe" Name="FalconOrchestrator.Client.exe" Source="..\FalconOrchestrator.Client\bin\Release\FalconOrchestrator.Client.exe" Vital="yes" DiskId="1"/>
+        <File Id="FalconOrchestrator.Client.exe.config" Name="FalconOrchestrator.Client.exe.config" Source="..\FalconOrchestrator.Client\bin\Release\FalconOrchestrator.Client.exe.config" Vital="yes" DiskId="1"/>
+        <File Id="FalconOrchestrator.DAL" Name="FalconOrchestrator.DAL.dll" Source="..\FalconOrchestrator.Client\bin\Release\FalconOrchestrator.DAL.dll" Vital="yes" DiskId="1"/>
+        <File Id="FalconOrchestrator.LDAP" Name="FalconOrchestrator.LDAP.dll" Source="..\FalconOrchestrator.Client\bin\Release\FalconOrchestrator.LDAP.dll" Vital="yes" DiskId="1"/>
+        <File Id="log4net" Name="log4net.dll" Source="..\FalconOrchestrator.Client\bin\Release\log4net.dll" Vital="yes" DiskId="1"/>
+        <File Id="Newtonsoft.Json" Name="Newtonsoft.Json.dll" Source="..\FalconOrchestrator.Client\bin\Release\Newtonsoft.Json.dll" Vital="yes" DiskId="1"/>
+        <File Id="EntityFramework" Name="EntityFramework.dll" Source="..\FalconOrchestrator.Client\bin\Release\EntityFramework.dll" Vital="yes" DiskId="1"/>
+        <File Id="EntityFramework.SqlServer" Name="EntityFramework.SqlServer.dll" Source="..\FalconOrchestrator.Client\bin\Release\EntityFramework.SqlServer.dll" Vital="yes" DiskId="1"/>
+        <ServiceInstall Id="FalconOrchestratorClient" 
+                        Type="ownProcess" 
+                        Name="Falcon Orchestrator Client" 
+                        DisplayName="Falcon Orchestrator Client" 
+                        Description="ETL service for connecting to CrowdStrike Falcon Host Streaming API and consuming detection events" 
+                        Start="demand" 
+                        Account="LocalSystem"
+                        Interactive="no"
+                        ErrorControl="critical"
+                        Vital="yes"/>
+        <ServiceControl Id="FalconOrchestratorClient_Control" Stop="both" Remove="uninstall" Name="Falcon Orchestrator Client" Wait="yes"/>
+        <RemoveFile Id="Files" On="uninstall" Name="*"/>
+      </Component>
+      <Component Id="UpdateConnectionString2" KeyPath="yes" Guid="">
+        <util:XmlFile Id="ModifyConnectionString2" Action="setValue" ElementPath="/configuration/connectionStrings/add/@connectionString"
+        Value="metadata=res://*/FalconOrchestratorDB.csdl|res://*/FalconOrchestratorDB.ssdl|res://*/FalconOrchestratorDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=[DB_DATABASE];user id=[DB_USER];password=[DB_PASSWORD];MultipleActiveResultSets=True;App=EntityFramework&quot;"
+                      File="[SERVICEFOLDER]FalconOrchestrator.Client.exe.config" Permanent="yes" SelectionLanguage="XPath"/>
+      </Component>
+      <Component Id="UpdateCryptoKey2" KeyPath="yes" Guid="">
+        <util:XmlFile Id="ModifyCryptoKey2" Action="setValue" ElementPath="/configuration/appSettings/add[\[]@key='CryptoKey'[\]]/@value"
+        Value="[ENCRYPTION_KEY]" File="[SERVICEFOLDER]FalconOrchestrator.Client.exe.config" Permanent="yes" SelectionLanguage="XPath"/>
+      </Component>
+    </DirectoryRef>   
+    <ComponentGroup Id="ServiceConfiguration">
+      <ComponentRef Id="ServiceComponent" />
+      <ComponentRef Id="UpdateConnectionString2" />
+      <ComponentRef Id="UpdateCryptoKey2" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

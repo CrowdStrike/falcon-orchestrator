@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "Detections";
+}
+@section BodyClass {@("background-whitesmoke")}
+<div class="container-fluid">
+    <div class="row box-shadow b-white">
+        <table id="datatable" class="table table-hover dt-responsive">
+            <thead>
+                <tr>
+                    <th>
+                       Start Time
+                    </th>
+                    <th>
+                        Severity
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Hostname
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        File Name
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Responder
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.fixedHeader.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-datetimepicker.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+
+            jQuery.fn.dataTableExt.oApi.fnSetFilteringDelay = function (oSettings, iDelay) {
+                var _that = this;
+
+                if (iDelay === undefined) {
+                    iDelay = 150;
+                }
+
+                this.each(function (i) {
+                    $.fn.dataTableExt.iApiIndex = i;
+                    var
+                        $this = this,
+                        oTimerId = null,
+                        sPreviousSearch = null,
+                        anControl = $('input', _that.fnSettings().aanFeatures.f);
+
+                    anControl.unbind('keyup search input').bind('keyup', function () {
+                        var $$this = $this;
+
+                        if (sPreviousSearch === null || sPreviousSearch != anControl.val()) {
+                            window.clearTimeout(oTimerId);
+                            sPreviousSearch = anControl.val();
+                            oTimerId = window.setTimeout(function () {
+                                $.fn.dataTableExt.iApiIndex = i;
+                                _that.fnFilter(anControl.val());
+                            }, iDelay);
+                        }
+                    });
+
+                    return this;
+                });
+                return this;
+            };
+
+            var $table = $('#datatable').dataTable({
+                "order": [[0, "desc"]],
+                "pagingType": "full_numbers",
+                "bServerSide": true,
+                "bAutoWidth": false,
+                "sAjaxSource": "/api/datatablehandler",
+                "bDeferRender": true,
+                "bProcessing": true,
+                "bSaveState": true,
+                "oLanguage": {
+                    "sProcessing": "<img src='/img/cs-spinner.gif'/>",
+                },
+                "aoColumns": [
+                                {
+                                    "sTitle": "Start Time",
+                                    "mData": "Timestamp"
+                                },
+                                {
+                                    "sTitle": "Severity",
+                                    "mData": null,
+                                    "sClass": "center-align",
+                                    "mRender": function (data)
+                                    {
+                                      return '<span class="label sev">' + data.Severity + '<span>'
+                                    }
+
+                                },
+                                {
+                                    "sTitle": "Name",
+                                    "mData": "DetectionName"
+                                },
+                                {
+                                    "sTitle": "Hostname",
+                                    "mData": "Hostname"
+                                },
+                                {
+                                    "sTitle": "Account",
+                                    "mData": "Username"
+                                },
+                                {
+                                    "sTitle": "File Name",
+                                    "mData": "FileName"
+                                },
+                                {
+                                    "sTitle": "Status",
+                                    "mData": null,
+                                    "sClass": "center-align",
+                                    "mRender": function (data) {
+                                        return '<span class="label status">' + data.Status + '<span>'
+                                    }
+                                },
+                                {
+                                    "sTitle": "Responder",
+                                    "mData": "Responder",
+                                    "sClass": "normal-space"
+                                },
+  
+                                {
+                                    "sTitle": "Actions",
+                                    "mData": null,
+                                    "sClass": "center-align",
+                                    "bSortable": false,
+                                    "mRender": function (data, type, full) {
+                                        return '<a class="btn btn-default btn-sm btn-success" href=/detection/edit/' + full.DT_RowId + '>'
+                                            + '<i class="fa fa-edit"></i>' + ' Edit' + '</a>'
+                                    }
+                                }
+                ]                   
+            });
+
+            $(document).ajaxComplete(function () {
+                ApplyLabels();
+            });
+        });
+
+    function ApplyLabels() {
+        var severity = $('span.label.sev');
+        var status = $('span.label.status');
+        $.each(severity, function () {
+            switch ($(this).text()) {
+                case 'Critical':
+                    $(this).addClass("label-important");
+                    break;
+                case 'High':
+                    $(this).addClass("label-important");
+                    break;
+                case 'Medium':
+                    $(this).addClass("label-warning");
+                    break;
+                case 'Low':
+                    $(this).addClass("label-success");
+                    break;
+                case 'Informational':
+                    $(this).addClass("label-info");
+                    break;
+                default:
+                    $(this).addClass("label-default");
+            }
+        });
+        $.each(status, function () {
+            switch ($(this).text()) {
+                case 'Open':
+                    $(this).addClass("label-success");
+                    break;
+                case 'Triage':
+                    $(this).addClass("label-primary");
+                    break;
+                case 'Containment':
+                    $(this).addClass("label-warning");
+                    break;
+                case 'Remediation':
+                    $(this).addClass("label-important");
+                    break;
+                case 'False Positive':
+                    $(this).addClass("label-info");
+                    break;
+                case 'Whitelisted':
+                    $(this).addClass("label-info");
+                    break;
+                case 'Closed':
+                    $(this).addClass("label-default");
+                    break;
+                default:
+                    $(this).addClass("label-default");
+            }
+        });
+    };
+</script>
+
+}
+
+
+@section styles{
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.fixedHeader.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

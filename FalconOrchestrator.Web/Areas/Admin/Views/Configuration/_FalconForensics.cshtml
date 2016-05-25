@@ -1,0 +1,58 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.FalconForensicsConfigViewModel
+@using (Ajax.BeginForm("FalconForensicsSettings", "Configuration", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-forensics" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="result-forensics" class="row col-12">
+    </div>
+    <div class="row col-12">
+        <h3>Forensics Service Account</h3>
+        <br />
+        <p>
+            Provide credentials for the privileged service account used to connect to remote systems for live forensic analysis.
+            This account should be well guarded as it will have administrative access to all in scope endpoints.
+        </p>
+        <br />
+    </div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i> Username</span>
+            @Html.TextBoxFor(model => model.Username,new { @class = "form-control"})
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i> Domain</span>
+            @Html.TextBoxFor(model => model.Domain, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i> Password</span>
+                @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i> ZIP Password</span>
+                @Html.PasswordFor(model => model.ZipPassword, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+<br />
+<div class="row col-8" style="margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-6">
+            <button type="submit" class="btn btn-default btn-success">
+                <i class="fa fa-save"></i> Save
+            </button>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,119 @@
+﻿@model List<FalconOrchestrator.IOC.Indicator>
+
+@{
+    ViewBag.Title = "Indicators";
+}
+
+<div class="container-fluid">
+    <h1>Indicator Management</h1>
+    <hr />
+    <div class="alert alert-danger fade in hidden" id="message">
+        <a href="#" class="close" data-dismiss="alert"><i class="fa fa-close"></i></a>
+        <i class="fa fa-exclamation-triangle"></i> <b>Error!</b> 
+    </div>
+    <p>
+        Upload your and manage your own indicators to the Falcon Host platform here.
+    </p>
+    <br />
+    <p>
+        <a href="/indicator/create" class="btn btn-success" id="create"><i class="fa fa-edit"></i> Create</a>
+    </p>
+    <br />
+    <table id="datatableWR" class="table table-hover dt-responsive">
+        <thead>
+            <tr>
+                <th>
+                    Created
+                </th>
+                <th>
+                    Value
+                </th>
+                <th>
+                    Source
+                </th>
+                <th>
+                    Description
+                </th>
+                <th class="center-align">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => item.CreatedTimestamp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.Source)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.Description)
+                    </td>
+                    <td class="center-align">
+                        <a class="btn btn-default btn-success btn-sm" href="/indicator/edit?id=@item.Type:@item.Value"><i class="fa fa-edit"></i> Edit</a>
+                        <a class="btn btn-default btn-danger btn-sm" href="#" onclick="DeleteRecord('@item.Type:@item.Value');"><i class="fa fa-trash-o"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#datatableWR').dataTable({
+                "order": [[0, "desc"]],
+                "pagingType": "simple_numbers",
+            });
+        });
+
+        function DeleteRecord(id) {
+
+            $.ajax({
+                url: '/indicator/delete/?id=' + id,
+                type: 'POST',
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (data) {
+                    $('#message').append(data.responseText);
+                    $('#message').removeClass('hidden');
+                }
+            });
+        }
+    </script>
+}
+
+
+@section styles{
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

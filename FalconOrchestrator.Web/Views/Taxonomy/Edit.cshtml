@@ -1,0 +1,95 @@
+﻿@model FalconOrchestratorWeb.Models.ViewModels.TaxonomyViewModel
+
+@{
+    ViewBag.Title = "Taxonomy - Edit";
+}
+<div class="container box-shadow">
+@using (Html.BeginForm("edit", "taxonomy", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.Hidden("TaxonomyId", Model.TaxonomyId)
+        @Html.Hidden("Creator", User.Identity.Name)
+
+        <span class="fa fa-2x fa-edit"></span>
+        <span class="header">Edit Taxonomy Rule @Model.TaxonomyId</span>
+        <hr />
+        @Html.ValidationSummary()
+        <p>
+            By creating a taxonomy rule, any detections with assets matching the rule will automatically be tagged based on the provided taxonomy description. To define rules using
+            Active Directory attributes ensure that the necessary settings have been configured.
+        </p>
+        <div class="well">
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Value, "Critical:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.CheckBoxFor(x => Model.Critical, new { data_toggle = "toggle", data_width = 150, data_on = "Yes", data_off = "No", data_onstyle = "success", data_offstyle = "danger", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Critical)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Type, "Type:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.DropDownList("TypeId", null, String.Empty, new { @class = "form-control", @id = "optionType", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.TypeId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Value, "Value:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.TextBoxFor(x => Model.Value, new { @class = "form-control", @readonly="readonly" })
+                    @Html.ValidationMessageFor(model => model.Value)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Description, "Description:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.TextAreaFor(x => Model.Description, new { @rows = "8", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-align">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}
+
+</div>
+
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-toggle.min.js")"></script>
+}
+
+
+@section styles{
+    <link href="@Url.Content("~/Content/bootstrap-toggle.min.css")" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

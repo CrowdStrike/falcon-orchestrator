@@ -1,0 +1,552 @@
+﻿@model FalconOrchestratorWeb.Models.ViewModels.DetectionEditViewModel
+@{
+    ViewBag.Title = "Detection - Edit";
+}
+@if (Model.AssociatedEventCount > 0)
+{
+    <div class="alert alert-info container">
+        <a href="#" class="close" data-dismiss="alert"><i class="fa fa-close"></i></a>
+        <i class="fa fa-exclamation-triangle"></i> <b>NOTE:</b> @Model.AssociatedEventCount additional event(s) are associated with this detection tree
+    </div>
+}
+@if (Model.TaxonomyCount > 0)
+{
+    <div class="alert alert-danger container">
+        <a href="#" class="close" data-dismiss="alert"><i class="fa fa-close"></i></a>
+        <i class="fa fa-exclamation-triangle"></i> <b>NOTE:</b> This detection matched the following taxonomies:
+            @foreach (string line in @Model.TaxonomyList)
+            {
+               @Html.Raw("<b>" + @line + "</b>")
+                if(Model.TaxonomyCount > 1)
+                {
+                    @Html.Raw(", ")
+                }
+            }
+    </div>
+}
+<div id="messages">
+
+</div>
+<div class="container box-shadow">
+    @using (Html.BeginForm("edit", "detection", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.DetectionId)
+        @Html.Partial("_Containment")
+        
+        //DETECTION DETAILS
+        <div class="row r-padding">
+            <h3 class="detect-heading"><span class="fa fa-info-circle"></span> Detection</h3>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Detect Id</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            <a href=@Model.FalconHostLink>@Model.DetectId</a>
+                            @Html.HiddenFor(x => x.FalconHostLink)
+                            @Html.HiddenFor(x => x.DetectId)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Start Time</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.StartTime
+                            @Html.HiddenFor(x => x.StartTime)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Offset</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Offset
+                            @Html.HiddenFor(x => x.Offset)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Stop Time</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.StopTime
+                            @Html.HiddenFor(x => x.StopTime)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Handler</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Handler
+                            @Html.HiddenFor(x => x.Handler)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Status</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            <span class="label status">@Model.Status</span>
+                            @if(@Model.ClosedDate != null)
+                            {
+                                @Html.Raw("[" + @Model.ClosedDate + "]")
+                            }
+                            @Html.HiddenFor(x => x.Status)                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Severity</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            <span class="label sev">@Model.Severity</span>
+                            @Html.HiddenFor(x => x.Severity)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Type</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Name
+                            @Html.HiddenFor(x => x.Name)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">File Name</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.FileName
+                            @Ajax.FormattedActionLink(string.Format("<i class=\"fa fa-arrow-circle-o-down\"></i>"), "InvokeFromDetection", "FileExtraction", new { computerName = @Model.Asset.Hostname, filePath = @Model.FilePath + "\\" + @Model.FileName }, new AjaxOptions { OnSuccess = "downloadFile", HttpMethod = "GET", UpdateTargetId="messages",InsertionMode=InsertionMode.Replace}, null)
+                            @Html.HiddenFor(x => x.FileName)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">File Path</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.FilePath
+                            @Html.HiddenFor(x => x.FilePath)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Description</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Description
+                            @Html.HiddenFor(x => x.Description)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">SHA256</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.SHA256
+                            @Html.HiddenFor(x => x.SHA256)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Command Line</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.CommandLine
+                            @Html.HiddenFor(x => x.CommandLine)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">MD5</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.MD5
+                            @Html.HiddenFor(x => x.MD5)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        //ASSET DETAILS
+        <div class="row r-padding">
+            <h3 class="detect-heading"><span class="fa fa-user"></span> Asset</h3>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Hostname</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.HostnameDisplay
+                            @Html.HiddenFor(x => x.Asset.Hostname)
+                            @Html.HiddenFor(x => x.Asset.Domain)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">IP Address</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.IPAddress
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Account</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.AccountName
+                            @Html.HiddenFor(x => x.Asset.AccountName)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Name</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.Name
+                            @Html.HiddenFor(x => x.Asset.Name)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Job Title</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.JobTitle
+                            @Html.HiddenFor(x => x.Asset.JobTitle)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Department</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.Department
+                            @Html.HiddenFor(x => x.Asset.Department)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Manager</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.Manager
+                            @Html.HiddenFor(x => x.Asset.Manager)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Email Address</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.EmailAddress
+                            @Html.HiddenFor(x => x.Asset.EmailAddress)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Phone Number</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.PhoneNumber
+                            @Html.HiddenFor(x => x.Asset.PhoneNumber)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Country</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.Country
+                            @Html.HiddenFor(x => x.Asset.Country)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">State/Province</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.StateProvince
+                            @Html.HiddenFor(x => x.Asset.StateProvince)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">City</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.City
+                            @Html.HiddenFor(x => x.Asset.City)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Street Address</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.StreetAddress
+                            @Html.HiddenFor(x => x.Asset.StreetAddress)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Last Logon</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.LastLogonTime
+                            @Html.HiddenFor(x => x.Asset.LastLogonTime)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">OU</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Model.Asset.OrganizationalUnit
+                            @Html.HiddenFor(x => x.Asset.OrganizationalUnit)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Groups</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @foreach(string line in @Model.Asset.GroupMemberships)
+                            {
+                                @line
+                                <br />
+                            }
+                            @Html.HiddenFor(x => x.Asset.GroupMemberships)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        //EDIT FORM
+        <div class="row r-padding">
+            <h3 class="detect-heading"><span class="fa fa-edit"></span> Edit</h3>
+            @Html.ValidationSummary()
+            <div class="row">
+                <div class="col-4">
+                   <label for="field" class="field-label-l">Responder</label>
+                   @Html.DropDownListFor(x => x.ResponderId, Model.ResponsersList, String.Empty, new { @class = "form-control" })
+                   @Html.ValidationMessageFor(x => x.ResponderId)
+                </div>
+                <div class="col-4"> 
+                    <label for="field" class="field-label-l">Status</label>
+                    @Html.DropDownListFor(x => x.StatusId, Model.StatusList,new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.StatusId)
+                </div>
+                <div class="col-4">
+                    <label for="field" class="field-label-l">IP Address</label>
+                    @Html.TextBoxFor(x => x.Asset.IPAddress, String.Empty, new { @class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.Asset.IPAddress)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="field" class="field-label-l">Severity</label>
+                    @Html.DropDownListFor(x => x.CustomSeverityId, Model.SeverityList, String.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.CustomSeverityId)
+                </div>
+                <div class="col-6">
+                    <label for="field" class="field-label-l">Tags</label>
+                    @Html.TextBoxFor(x => x.Tags, new { @class = "form-control", data_role = "tagsinput"})
+                    @Html.ValidationMessageFor(x => x.Tags)
+                </div>
+            </div>
+            <label for="field" class="field-label-l"> Comments</label>
+             @Html.TextAreaFor(x => x.Comment, new { @rows = "6", @class = "form-control" })
+             @Html.ValidationMessageFor(x => x.Comment)
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> Save
+            </button>
+        </div>
+    }
+          
+</div>
+@section scripts
+{
+<script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-tagsinput.min.js")"></script>
+<script>
+    $(document).ready(function () {
+            $('#StatusId').change(function () {
+                var $value = $(this).val();
+                if ($value == 4) {
+                    var $base = window.location.protocol + "//" + window.location.host;
+                    window.open($base + '@Url.Action("create", "ticketing", new { id = @Model.DetectionId })', "_blank");
+                }
+                if ($value == 3) {
+                    $('#containmentModal').modal('show');
+                }
+            });
+    });
+
+        function downloadFile()
+        {
+            window.location = '/forensics/file-extraction/downloadfile?fileName=@Model.FileName';
+        }
+
+        $(function () {
+            var severity = $('span.label.sev');
+            var status = $('span.label.status');
+
+            $.each(severity, function () {
+                switch ($(this).text()) {
+                    case 'Critical':
+                        $(this).addClass("label-important");
+                        break;
+                    case 'High':
+                        $(this).addClass("label-important");
+                        break;
+                    case 'Medium':
+                        $(this).addClass("label-warning");
+                        break;
+                    case 'Low':
+                        $(this).addClass("label-success");
+                        break;
+                    case 'Informational':
+                        $(this).addClass("label-info");
+                        break;
+                    default:
+                        $(this).addClass("label-default");
+                }
+            });
+
+            $.each(status, function () {
+                switch ($(this).text()) {
+                    case 'Open':
+                        $(this).addClass("label-success");
+                        break;
+                    case 'Triage':
+                        $(this).addClass("label-primary");
+                        break;
+                    case 'Containment':
+                        $(this).addClass("label-warning");
+                        break;
+                    case 'Remediation':
+                        $(this).addClass("label-important");
+                        break;
+                    case 'False Positive':
+                        $(this).addClass("label-info");
+                        break;
+                    case 'Whitelisted':
+                        $(this).addClass("label-info");
+                        break;
+                    case 'Closed':
+                        $(this).addClass("label-default");
+                        break;
+                    default:
+                        $(this).addClass("label-default");
+                }
+            });
+        });
+
+        $(function () {
+            $("span.field-validation-valid, span.field-validation-error").addClass('help-block');
+            $("div.col-6").has("span.field-validation-error").addClass('has-error');
+            $("div.validation-summary-errors").has("li:visible").addClass("alert alert-block alert-danger");
+        });
+
+</script>
+}
+
+@section styles
+{
+<link href="@Url.Content("~/Content/bootstrap-tagsinput.css")" rel="stylesheet" type="text/css" />
+}

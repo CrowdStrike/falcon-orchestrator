@@ -1,0 +1,71 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.LDAPConfigViewModel
+@using (Ajax.BeginForm("LDAPSettings", "Configuration", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-ldap" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="result-ldap" class="row col-12">
+    </div>
+    <div class="row col-12">
+        <h3>Active Directory Configuration</h3>
+        <br />
+        <p>
+            The below settings are required to integrate with your LDAP server for automatically obtaining
+            user accounts metadata, defining VIP monitoring OU's and performing account containment. A server
+            DNS name or IP address and credentials to access the LDAP server are required.  The description field
+            is used to define the message that is added to an AD user account's description field when a containment action
+            has been taken.  This provides a written explanation for why the account has been modified.  The expiration timer
+            determines how long a cached copy of the account metadata is considered valid.  If the timestamp on the account record
+            execeeds this timer a new lookup against Active Directory will be made.
+        </p>
+        <br />
+    </div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-server"></i> Server</span>
+            @Html.TextBoxFor(model => model.Server, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i> Username</span>
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control"})
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-key"></i> Password</span>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control"})
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-font"></i> Description</span>
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-clock-o"></i> Days Valid</span>
+            @Html.TextBoxFor(model => model.DaysValid, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<br />
+<div class="row col-8" style="margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-6">
+            <button type="submit" class="btn btn-default btn-success">
+                <i class="fa fa-save"></i> Save
+            </button>
+        </div>
+    </div>
+</div>
+}

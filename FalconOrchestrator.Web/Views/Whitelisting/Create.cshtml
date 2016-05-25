@@ -1,0 +1,85 @@
+﻿@model FalconOrchestratorWeb.Models.ViewModels.WhitelistingViewModel
+
+@{
+    ViewBag.Title = "Whitelisting - Create";
+}
+<div class="container box-shadow">
+@using (Html.BeginForm("Create", "Whitelisting", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.Hidden("Creator", User.Identity.Name)
+        <span class="fa fa-2x fa-edit"></span>
+        <span class="header">Create Whitelist Rule</span>
+        <hr />
+        @Html.ValidationSummary()
+        <p>
+            Note that once changes are applied, events will be updated retroactively.  Once a value has been included in the whitelist,
+            all past and future events matching the criteria will automatically be marked
+            in a <strong>WHITELISTED</strong> status.
+        </p>
+        <br />
+        <div class="well">
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Type, "Type:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.DropDownList("TypeId", null, String.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TypeId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Value, "Value:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.TextBoxFor(model => model.Value, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Value)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Reason, "Reason:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.TextAreaFor(model => model.Reason, new { @rows = "8", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Reason)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-align">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}
+</div>
+
+
+@section scripts{
+}
+
+
+@section styles{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

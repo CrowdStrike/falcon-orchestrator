@@ -1,0 +1,133 @@
+﻿@model FalconOrchestratorWeb.Models.Dashboard.DashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@section BodyClass {@("background-whitesmoke")}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-body panel-number">
+                    <h1>@Model.AverageDetectionsPerDay</h1>
+                    <small>Avg Detections Per Day</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-body panel-number">
+                    <h1>@Model.AverageDetectionsPerWeek</h1>
+                    <small>Avg Detections Per Week</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-body panel-number">
+                    <h1>@Model.AverageDetectionsPerMonth</h1>
+                    <small>Avg Detections Per Month</small>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="panel panel-default box-shadow b-white">
+                    <div class="panel-heading b-white">
+                        <h3 class="panel-title">Detections By Severity</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Model.DetectionsBySeverity
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="panel panel-default box-shadow b-white">
+                    <div class="panel-heading b-white">
+                        <h3 class="panel-title">Detections By Status</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Model.DetectionsByStatus
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-heading b-white">
+                    <h3 class="panel-title">Detections By Type</h3>
+                </div>
+                <div class="panel-body">
+                    @Model.DetectionsByType
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-heading b-white">
+                    <h3 class="panel-title">Detections By Taxonomy</h3>
+                </div>
+                <div class="panel-body">
+                    @Model.DetectionsByTaxonomy
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-heading b-white">
+                    <h3 class="panel-title">Detections By User Country</h3>
+                </div>
+                <div class="panel-body">
+                    @Model.DetectionsByUserCountry
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-heading b-white">
+                    <h3 class="panel-title">Detections By User Department</h3>
+                </div>
+                <div class="panel-body">
+                    @Model.DetectionsByUserDepartment
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-heading b-white">
+                    <h3 class="panel-title">Detections By User Job Title</h3>
+                </div>
+                <div class="panel-body b-white">
+                    @Model.DetectionsByUserJobTitle
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="panel panel-default box-shadow b-white">
+                <div class="panel-heading b-white">
+                    <h3 class="panel-title">Detections By Responder And Status</h3>
+                </div>
+                <div class="panel-body">
+                    @Model.DetectionsByHandlerAndStatus
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/highcharts-all.js")"></script>
+
+}
+
+@section styles{
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />
+}

@@ -1,0 +1,247 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<title>
+			Falcon Orchestrator Detection Alert Notification
+		</title>
+		<style type="text/css">
+		@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic);
+		body{width:100%;margin:0px;padding:0px;background:#ffffff;text-align:center;}
+		html{width:100%;}
+		.ReadMsgBody{width:100%; background-color: #ffffff;}
+		.ExternalClass{width:100%; background-color: #ffffff;}
+		img {border:0px;outline:none;text-decoration:none;display:block;}
+		a img {border:none;}
+		.bgColor {background-color:#e6e6e6;}
+		.ContentBlockColor02 {background-color:#656064;}
+		a,a:hover{color:#c4c4c4;text-decoration:none;}
+		div, p, a, li, td { -webkit-text-size-adjust:none;}
+		table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;} 
+
+		.img_ThirdW Img { width: 190px!important; height: 180px!important;}
+		.img_Third { width: 190px!important; height: 180px!important;}
+
+		@media only screen and (max-width:640px) {
+		body{ width:auto!important;}
+		.main{width: 440px !important;}
+		.inner{width: 400px !important;}
+		.column{width: 440px !important;}
+		.bWrap { width:440px !important;}
+		.reListMedium { width:340px !important;} 
+		.reHideMedium { display:none !important;} 
+		.reShowMedium { display:block !important;} 
+		.reCenterMedium { text-align:center !important;}
+		.img_ThirdW Img { width: 440px!important; height: 417px!important;}
+		.img_Third { width: 440px!important; height: 417px!important;}
+		}
+
+		@media only screen and (max-width:479px) {
+		body{ width:auto!important;}
+		.main{width: 280px !important;}
+		.inner{width: 240px !important;}
+		.column{width: 240px !important;}
+		.bWrap { width:280px !important;}
+		.reHideSmall { display:none !important;}
+		.reCenterSmall { text-align:center !important;}
+		.imgThumb {width:100%!important; padding-left:0!important; padding-right:0!important}
+		.img_ThirdW Img { width: 280px!important; height: 265px!important;}
+		.img_Third { width: 280px!important; height: 265px!important;}
+		}
+		</style>
+	</head>
+	<body>
+		<!--  Main Table Start-->
+		<table width="100%" border="0" bgcolor="#EFEFEF" align="center" cellpadding="0" cellspacing="0" style="background-color:#efefef; -webkit-font-smoothing:antialiased;">
+			<tr>
+				
+			</tr>
+			<tr>
+				<td align="center" valign="top" style="padding-bottom:60px;">
+					<!--  Inner Table Start-->
+					<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="main">
+						<tr>
+							<td align="center" valign="top">
+								<table width="600px" border="0" align="center" cellpadding="0" cellspacing="0" class="main">
+									<!-- Logo Start -->
+									<tr>
+										<td align="center" valign="middle" style="background-color:#414042; border-bottom:#e3e3e3 solid 1px;">
+											<a href="#"><img src="logo.png" width="450" height="79" Style="display:block; width:100% Height="auto"!important; background-color:#414042;" /></a>
+										</td>
+									</tr>
+								</table><!-- Logo End -->
+								<!--  Intro Start-->
+								<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="main">
+									<tr>
+										<td align="left" valign="top">
+											<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="main">
+												<tr>
+													<td align="center" valign="top" bgcolor="#EFEFEF" style="background:#ffffff; padding-top:10px; padding-bottom:30px;">
+														<table width="550" border="0" cellspacing="0" cellpadding="0" class="inner">
+															<tr>
+																<td align="center" valign="top" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:18px; color:#ec3525; padding:4px 10px 10px 10px;">
+																	Detection Notification
+																</td>
+															</tr>
+															<tbody>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Severity
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{Severity}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Description
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{DetectionDescription}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Scenario
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{DetectionName}}
+																	</td>
+																</tr>
+																																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		File Name
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{FileName}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		File Path
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{FilePath}}
+																	</td>
+																</tr>
+																																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Start Time
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{ProcessStartTime}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		End Time
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{ProcessEndtime}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Hostname
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{Hostname}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		IP Address
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{IPAddress}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Username
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{Username}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		First Name
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{FirstName}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Last Name
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{LastName}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Department
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{Department}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Job Title
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{JobTitle}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Country
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{Country}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		City
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{City}}
+																	</td>
+																</tr>
+																<tr bgcolor="#EFEFEF">
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Falcon Host URL
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{FalconHostLink}}
+																	</td>
+																</tr>
+																<tr>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		Falcon Orchestrator URL
+																	</td>
+																	<td align="left" valign="top" border="2px" style="font-family:'Noto Sans', Helvetica, Arial, sans-serif; font-weight:400; font-size:12px; color:#555555; line-height:22px; padding:10px;">
+																		{{FalconOrchestratorLink}}
+																	</td>
+																</tr>
+
+															</tbody>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table><!-- INTRO END -->
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<FalconOrchestratorWeb.Areas.Admin.Models.RecipientViewModel>
+
+@{
+    ViewBag.Title = "Admin - Recipients";
+}
+
+<div class="container">
+    <h1>Ticket Recipients</h1>
+    <hr />
+    <p>
+        Here's where you should populate the contact information for the individuals that will be responding to falcon host detection events.
+        You can use the rotation schedule to assign a handler on a per day basis, this way detection events are automatically assigned to that user.
+        This is a good way to manage accountability within the workflow.
+    </p>
+    <br />
+    <p>
+        <a href="/admin/recipient/create" class="btn btn-success" id="create"><i class="fa fa-edit"></i> Create</a>
+    </p>
+    <br />
+    <table id="datatable" class="table table-striped table-hover table-bordered dt-responsive">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Email Address
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th class="center-align">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.PhoneNumber)
+                    </td>
+                    <td class="center-align">
+                        <a class="btn btn-default btn-success btn-sm" href="/admin/recipient/edit/@item.TicketRecipientId"><i class="fa fa-edit"></i> Edit</a>
+                        @Ajax.FormattedActionLink(string.Format("<i class='fa fa-trash-o'></i> Delete"), "delete", "recipient", new { id = @item.TicketRecipientId }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "refresh" }, new { @class = "btn btn-default btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#datatable').dataTable({
+                "order": [[0, "asc"]],
+                "pagingType": "simple_numbers"
+            });
+        });
+
+        function refresh() {
+            location.reload();
+        };
+    </script>
+}
+
+@section styles{
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />
+}

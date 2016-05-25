@@ -1,0 +1,75 @@
+﻿@model FalconOrchestratorWeb.Models.ViewModels.DetectionEditViewModel
+<div id="containmentModal" class="modal fade in" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header r-padding">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i></button>
+                <h4 class="modal-title">User Account Containment</h4>
+            </div>
+            <div class="modal-body r-padding">
+                <div class="row r-padding" >
+                    <p class="col-12"><b>NOTE:</b> The below options will result in the account 
+                    <strong>@Model.Asset.AccountName</strong> being modified within the Active Directory database.  
+                    This allows for containment of the account credentials only and not the device.</p>
+                </div>
+                <div class="row r-padding">
+                    <div class="col-8 ">
+                        <div class="input-group">
+                            @Html.CheckBox("DisableAccount", false)
+                            <span> Disable User Account</span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row r-padding">
+                    <div class="col-8 ">
+                        <div class="input-group">
+                            @Html.CheckBox("EnforcePwdReset", false)
+                            <span> Enforce Password Reset</span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input id="containment-submit" type="button" value="Submit" class="btn btn-default btn-primary" data-dismiss="modal"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#containment-submit').click(function () {
+        var $username = $('#Asset_AccountName').val();
+        var $pwdReset;
+        var $disableAccount;
+        if ($('#EnforcePwdReset').is(':checked'))
+        {
+            $pwdReset = true;
+        } else {
+            $pwdReset = false;  
+        }
+        if ($('#DisableAccount').is(':checked')) {
+            $disableAccount = true;
+        } else {
+            $disableAccount = false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Content("~/api/containment")',
+            data: {
+                'username': $username,
+                'pwdReset' : $pwdReset,
+                'disableAccount': $disableAccount
+            },
+            success: function () {
+                alert("SUCCESS: account " + $username + " contained");
+            },
+            error: function () {
+
+                alert("ERROR: Failed to contain account " + $username);
+            }
+        });
+    });
+</script>
+

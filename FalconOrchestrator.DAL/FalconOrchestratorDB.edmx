@@ -1,0 +1,2351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FalconOrchestratorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountGroups">
+          <Key>
+            <PropertyRef Name="AccountGroupId" />
+          </Key>
+          <Property Name="AccountGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="75" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="75" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateProvince" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="StreetAddress" Type="nvarchar" MaxLength="75" />
+          <Property Name="LastLogon" Type="datetime" />
+          <Property Name="OrganizationalUnit" Type="nvarchar(max)" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountTickets">
+          <Key>
+            <PropertyRef Name="AccounTicketId" />
+          </Key>
+          <Property Name="AccounTicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="TicketId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuthenticationLogs">
+          <Key>
+            <PropertyRef Name="AuthId" />
+          </Key>
+          <Property Name="AuthId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Success" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserIp" Type="nvarchar" MaxLength="45" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Offset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Entitlement" Type="nvarchar" MaxLength="100" />
+          <Property Name="EntitlementGroup" Type="nvarchar" MaxLength="100" />
+          <Property Name="TargetName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configurations">
+          <Key>
+            <PropertyRef Name="ConfigId" />
+          </Key>
+          <Property Name="ConfigId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CustomerIOCEvents">
+          <Key>
+            <PropertyRef Name="CustomIOCEventId" />
+          </Key>
+          <Property Name="CustomIOCEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Offset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="DetectionDeviceId" Type="int" Nullable="false" />
+          <Property Name="ProcessId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentProcessId" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="FilePath" Type="nvarchar(max)" />
+          <Property Name="CommandLine" Type="nvarchar(max)" />
+          <Property Name="MD5String" Type="nvarchar" MaxLength="32" />
+          <Property Name="IPv4" Type="nvarchar" MaxLength="15" />
+          <Property Name="DomainName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerIdString" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DetectionDevices">
+          <Key>
+            <PropertyRef Name="DetectionDeviceId" />
+          </Key>
+          <Property Name="DetectionDeviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="45" />
+          <Property Name="DeviceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detections">
+          <Key>
+            <PropertyRef Name="DetectionId" />
+          </Key>
+          <Property Name="DetectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="ProcessStartTime" Type="datetime" />
+          <Property Name="ProcessEndTime" Type="datetime" />
+          <Property Name="CommandLine" Type="nvarchar(max)" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FalconHostLink" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="SHA256" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="MD5" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="SHA1" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="AVDetections" Type="bit" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="ClosedDate" Type="datetime" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="DetectionDeviceId" Type="int" Nullable="false" />
+          <Property Name="Offset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProcessId" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentProcessId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="VendorSeverityId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CustomSeverityId" Type="int" Nullable="false" />
+          <Property Name="ResponderId" Type="int" />
+        </EntityType>
+        <EntityType Name="DetectionTags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetectionTaxonomies">
+          <Key>
+            <PropertyRef Name="DetectTaxId" />
+          </Key>
+          <Property Name="DetectTaxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+          <Property Name="TaxonomyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetectionTickets">
+          <Key>
+            <PropertyRef Name="DetectionTicketId" />
+          </Key>
+          <Property Name="DetectionTicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+          <Property Name="TicketId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="DeviceId" />
+          </Key>
+          <Property Name="DeviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hostname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Domain" Type="nvarchar" MaxLength="50" />
+          <Property Name="SensorId" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DeviceTickets">
+          <Key>
+            <PropertyRef Name="DeviceTicketId" />
+          </Key>
+          <Property Name="DeviceTicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="TicketId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DnsRequests">
+          <Key>
+            <PropertyRef Name="DnsRequestId" />
+          </Key>
+          <Property Name="DnsRequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="CausedDetect" Type="bit" Nullable="false" />
+          <Property Name="DomainName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RequestType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InterfaceIndex" Type="int" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentsAccesses">
+          <Key>
+            <PropertyRef Name="DocAccessedId" />
+          </Key>
+          <Property Name="DocAccessedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExecutablesWrittens">
+          <Key>
+            <PropertyRef Name="ExeWrittenId" />
+          </Key>
+          <Property Name="ExeWrittenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NetworkAccesses">
+          <Key>
+            <PropertyRef Name="NetAccessId" />
+          </Key>
+          <Property Name="NetAccessId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="AccessType" Type="int" Nullable="false" />
+          <Property Name="ConnectionDirection" Type="int" Nullable="false" />
+          <Property Name="IsIPv6" Type="bit" Nullable="false" />
+          <Property Name="LocalAddress" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="LocalPort" Type="int" Nullable="false" />
+          <Property Name="RemoteAddress" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="RemotePort" Type="int" Nullable="false" />
+          <Property Name="Protocol" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Responders">
+          <Key>
+            <PropertyRef Name="ResponderId" />
+          </Key>
+          <Property Name="ResponderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="ResponderSchedules">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayOfWeek" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResponderId" Type="int" />
+        </EntityType>
+        <EntityType Name="ScanResults">
+          <Key>
+            <PropertyRef Name="ScanResultId" />
+          </Key>
+          <Property Name="ScanResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Engine" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ResultName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DetectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Severities">
+          <Key>
+            <PropertyRef Name="SeverityId" />
+          </Key>
+          <Property Name="SeverityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeverityType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusType" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Taxonomies">
+          <Key>
+            <PropertyRef Name="TaxonomyId" />
+          </Key>
+          <Property Name="TaxonomyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Critical" Type="bit" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaxTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaxonomyTypes">
+          <Key>
+            <PropertyRef Name="TaxTypeId" />
+          </Key>
+          <Property Name="TaxTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketRecipients">
+          <Key>
+            <PropertyRef Name="TicketRecipientId" />
+          </Key>
+          <Property Name="TicketRecipientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="TicketId" />
+          </Key>
+          <Property Name="TicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExternalTicket" Type="nvarchar" MaxLength="20" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DispatchDate" Type="datetime" />
+          <Property Name="CompletionDate" Type="datetime" />
+          <Property Name="TicketRecipientId" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="SeverityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserActivityLogs">
+          <Key>
+            <PropertyRef Name="UserActivityLogId" />
+          </Key>
+          <Property Name="UserActivityLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Success" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserIp" Type="nvarchar" MaxLength="45" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Offset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DetectId" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Whitelists">
+          <Key>
+            <PropertyRef Name="WhitelistId" />
+          </Key>
+          <Property Name="WhitelistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="WhitelistTypeId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WhitelistTypes">
+          <Key>
+            <PropertyRef Name="WhitelistTypeId" />
+          </Key>
+          <Property Name="WhitelistTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FalconOrchestrator.dbo.v_DetectionAverages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_DetectionAverages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Daily" Type="int" />
+          <Property Name="Weekly" Type="int" />
+          <Property Name="Monthly" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'FalconOrchestrator.dbo.v_DetectionCountByDay' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="v_DetectionCountByDay">
+          <Property Name="IndividualDate" Type="datetime" />
+          <Property Name="CountPerDay" Type="int" />
+        </EntityType>-->
+        <Association Name="FK_AccountAccountGroups">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountGroups" Type="Self.AccountGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="AccountGroups">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountAccountTicket">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountTickets" Type="Self.AccountTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="AccountTickets">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountEvents">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAuthenticationLogs">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="AuthenticationLogs" Type="Self.AuthenticationLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="AuthenticationLogs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerCustomerIOCEvent">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="CustomerIOCEvents" Type="Self.CustomerIOCEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerIOCEvents">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetection">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetectStatusLogs">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="UserActivityLogs" Type="Self.UserActivityLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="UserActivityLogs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDetectionTaxonomies">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="DetectionTaxonomies" Type="Self.DetectionTaxonomies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DetectionTaxonomies">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDeviceCustomerIOCEvent">
+          <End Role="DetectionDevices" Type="Self.DetectionDevices" Multiplicity="1" />
+          <End Role="CustomerIOCEvents" Type="Self.CustomerIOCEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetectionDevices">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Principal>
+            <Dependent Role="CustomerIOCEvents">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDeviceDetection">
+          <End Role="DetectionDevices" Type="Self.DetectionDevices" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetectionDevices">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDnsRequests">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="DnsRequests" Type="Self.DnsRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DnsRequests">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDocumentsAccessed">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="DocumentsAccesses" Type="Self.DocumentsAccesses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DocumentsAccesses">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionEventTags">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="DetectionTags" Type="Self.DetectionTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DetectionTags">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionExecutablesWritten">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="ExecutablesWrittens" Type="Self.ExecutablesWrittens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="ExecutablesWrittens">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionNetworkAccesses">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="NetworkAccesses" Type="Self.NetworkAccesses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="NetworkAccesses">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionScanResults">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="ScanResults" Type="Self.ScanResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="ScanResults">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionTicketEvent">
+          <End Role="Detections" Type="Self.Detections" Multiplicity="1" />
+          <End Role="DetectionTickets" Type="Self.DetectionTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DetectionTickets">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDetectionDevice">
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+          <End Role="DetectionDevices" Type="Self.DetectionDevices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="DetectionDevices">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDeviceTicket">
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+          <End Role="DeviceTickets" Type="Self.DeviceTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="DeviceTickets">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupsAccountGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="AccountGroups" Type="Self.AccountGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="AccountGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponderDetection">
+          <End Role="Responders" Type="Self.Responders" Multiplicity="0..1" />
+          <End Role="Detections" Type="Self.Detections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responders">
+              <PropertyRef Name="ResponderId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="ResponderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponderResponderSchedule">
+          <End Role="Responders" Type="Self.Responders" Multiplicity="0..1" />
+          <End Role="ResponderSchedules" Type="Self.ResponderSchedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responders">
+              <PropertyRef Name="ResponderId" />
+            </Principal>
+            <Dependent Role="ResponderSchedules">
+              <PropertyRef Name="ResponderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeverityDetection">
+          <End Role="Severities" Type="Self.Severities" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Severities">
+              <PropertyRef Name="SeverityId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="CustomSeverityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeverityTicket">
+          <End Role="Severities" Type="Self.Severities" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Severities">
+              <PropertyRef Name="SeverityId" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="SeverityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatusDetection">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagEventTags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="DetectionTags" Type="Self.DetectionTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="DetectionTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxonomyDetectionTaxonomies">
+          <End Role="Taxonomies" Type="Self.Taxonomies" Multiplicity="1" />
+          <End Role="DetectionTaxonomies" Type="Self.DetectionTaxonomies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taxonomies">
+              <PropertyRef Name="TaxonomyId" />
+            </Principal>
+            <Dependent Role="DetectionTaxonomies">
+              <PropertyRef Name="TaxonomyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxonomyTypesTaxonomy">
+          <End Role="TaxonomyTypes" Type="Self.TaxonomyTypes" Multiplicity="1" />
+          <End Role="Taxonomies" Type="Self.Taxonomies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxonomyTypes">
+              <PropertyRef Name="TaxTypeId" />
+            </Principal>
+            <Dependent Role="Taxonomies">
+              <PropertyRef Name="TaxTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketAccountTicket">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="AccountTickets" Type="Self.AccountTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="AccountTickets">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketDetectionTicket">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="DetectionTickets" Type="Self.DetectionTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="DetectionTickets">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketDeviceTicket">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="DeviceTickets" Type="Self.DeviceTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="DeviceTickets">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketRecipientTicket">
+          <End Role="TicketRecipients" Type="Self.TicketRecipients" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketRecipients">
+              <PropertyRef Name="TicketRecipientId" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="TicketRecipientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WhitelistTypeWhitelist">
+          <End Role="WhitelistTypes" Type="Self.WhitelistTypes" Multiplicity="1" />
+          <End Role="Whitelists" Type="Self.Whitelists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WhitelistTypes">
+              <PropertyRef Name="WhitelistTypeId" />
+            </Principal>
+            <Dependent Role="Whitelists">
+              <PropertyRef Name="WhitelistTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FalconOrchestratorModelStoreContainer">
+          <EntitySet Name="AccountGroups" EntityType="Self.AccountGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountTickets" EntityType="Self.AccountTickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthenticationLogs" EntityType="Self.AuthenticationLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configurations" EntityType="Self.Configurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerIOCEvents" EntityType="Self.CustomerIOCEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetectionDevices" EntityType="Self.DetectionDevices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detections" EntityType="Self.Detections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetectionTags" EntityType="Self.DetectionTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetectionTaxonomies" EntityType="Self.DetectionTaxonomies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetectionTickets" EntityType="Self.DetectionTickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceTickets" EntityType="Self.DeviceTickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DnsRequests" EntityType="Self.DnsRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentsAccesses" EntityType="Self.DocumentsAccesses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExecutablesWrittens" EntityType="Self.ExecutablesWrittens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NetworkAccesses" EntityType="Self.NetworkAccesses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responders" EntityType="Self.Responders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResponderSchedules" EntityType="Self.ResponderSchedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScanResults" EntityType="Self.ScanResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Severities" EntityType="Self.Severities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taxonomies" EntityType="Self.Taxonomies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaxonomyTypes" EntityType="Self.TaxonomyTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketRecipients" EntityType="Self.TicketRecipients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserActivityLogs" EntityType="Self.UserActivityLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Whitelists" EntityType="Self.Whitelists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WhitelistTypes" EntityType="Self.WhitelistTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_DetectionAverages" EntityType="Self.v_DetectionAverages" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_DetectionAverages].[Id] AS [Id], 
+    [v_DetectionAverages].[Daily] AS [Daily], 
+    [v_DetectionAverages].[Weekly] AS [Weekly], 
+    [v_DetectionAverages].[Monthly] AS [Monthly]
+    FROM [dbo].[v_DetectionAverages] AS [v_DetectionAverages]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AccountAccountGroups" Association="Self.FK_AccountAccountGroups">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountGroups" EntitySet="AccountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountAccountTicket" Association="Self.FK_AccountAccountTicket">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountTickets" EntitySet="AccountTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountEvents" Association="Self.FK_AccountEvents">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAuthenticationLogs" Association="Self.FK_CustomerAuthenticationLogs">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="AuthenticationLogs" EntitySet="AuthenticationLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCustomerIOCEvent" Association="Self.FK_CustomerCustomerIOCEvent">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerIOCEvents" EntitySet="CustomerIOCEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetection" Association="Self.FK_CustomerDetection">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetectStatusLogs" Association="Self.FK_CustomerDetectStatusLogs">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="UserActivityLogs" EntitySet="UserActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDetectionTaxonomies" Association="Self.FK_DetectionDetectionTaxonomies">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DetectionTaxonomies" EntitySet="DetectionTaxonomies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDeviceCustomerIOCEvent" Association="Self.FK_DetectionDeviceCustomerIOCEvent">
+            <End Role="DetectionDevices" EntitySet="DetectionDevices" />
+            <End Role="CustomerIOCEvents" EntitySet="CustomerIOCEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDeviceDetection" Association="Self.FK_DetectionDeviceDetection">
+            <End Role="DetectionDevices" EntitySet="DetectionDevices" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDnsRequests" Association="Self.FK_DetectionDnsRequests">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DnsRequests" EntitySet="DnsRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDocumentsAccessed" Association="Self.FK_DetectionDocumentsAccessed">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DocumentsAccesses" EntitySet="DocumentsAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionEventTags" Association="Self.FK_DetectionEventTags">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DetectionTags" EntitySet="DetectionTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionExecutablesWritten" Association="Self.FK_DetectionExecutablesWritten">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="ExecutablesWrittens" EntitySet="ExecutablesWrittens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionNetworkAccesses" Association="Self.FK_DetectionNetworkAccesses">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="NetworkAccesses" EntitySet="NetworkAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionScanResults" Association="Self.FK_DetectionScanResults">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="ScanResults" EntitySet="ScanResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionTicketEvent" Association="Self.FK_DetectionTicketEvent">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DetectionTickets" EntitySet="DetectionTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDetectionDevice" Association="Self.FK_DeviceDetectionDevice">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="DetectionDevices" EntitySet="DetectionDevices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDeviceTicket" Association="Self.FK_DeviceDeviceTicket">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="DeviceTickets" EntitySet="DeviceTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupsAccountGroups" Association="Self.FK_GroupsAccountGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="AccountGroups" EntitySet="AccountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponderDetection" Association="Self.FK_ResponderDetection">
+            <End Role="Responders" EntitySet="Responders" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponderResponderSchedule" Association="Self.FK_ResponderResponderSchedule">
+            <End Role="Responders" EntitySet="Responders" />
+            <End Role="ResponderSchedules" EntitySet="ResponderSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeverityDetection" Association="Self.FK_SeverityDetection">
+            <End Role="Severities" EntitySet="Severities" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeverityTicket" Association="Self.FK_SeverityTicket">
+            <End Role="Severities" EntitySet="Severities" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatusDetection" Association="Self.FK_StatusDetection">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagEventTags" Association="Self.FK_TagEventTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="DetectionTags" EntitySet="DetectionTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxonomyDetectionTaxonomies" Association="Self.FK_TaxonomyDetectionTaxonomies">
+            <End Role="Taxonomies" EntitySet="Taxonomies" />
+            <End Role="DetectionTaxonomies" EntitySet="DetectionTaxonomies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxonomyTypesTaxonomy" Association="Self.FK_TaxonomyTypesTaxonomy">
+            <End Role="TaxonomyTypes" EntitySet="TaxonomyTypes" />
+            <End Role="Taxonomies" EntitySet="Taxonomies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketAccountTicket" Association="Self.FK_TicketAccountTicket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="AccountTickets" EntitySet="AccountTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketDetectionTicket" Association="Self.FK_TicketDetectionTicket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="DetectionTickets" EntitySet="DetectionTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketDeviceTicket" Association="Self.FK_TicketDeviceTicket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="DeviceTickets" EntitySet="DeviceTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketRecipientTicket" Association="Self.FK_TicketRecipientTicket">
+            <End Role="TicketRecipients" EntitySet="TicketRecipients" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WhitelistTypeWhitelist" Association="Self.FK_WhitelistTypeWhitelist">
+            <End Role="WhitelistTypes" EntitySet="WhitelistTypes" />
+            <End Role="Whitelists" EntitySet="Whitelists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FalconOrchestratorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountGroup">
+          <Key>
+            <PropertyRef Name="AccountGroupId" />
+          </Key>
+          <Property Name="AccountGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_AccountAccountGroups" FromRole="AccountGroups" ToRole="Accounts" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_GroupsAccountGroups" FromRole="AccountGroups" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateProvince" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetAddress" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="LastLogon" Type="DateTime" Precision="3" />
+          <Property Name="OrganizationalUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AccountGroups" Relationship="Self.FK_AccountAccountGroups" FromRole="Accounts" ToRole="AccountGroups" />
+          <NavigationProperty Name="AccountTickets" Relationship="Self.FK_AccountAccountTicket" FromRole="Accounts" ToRole="AccountTickets" />
+          <NavigationProperty Name="Detections" Relationship="Self.FK_AccountEvents" FromRole="Accounts" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="AccountTicket">
+          <Key>
+            <PropertyRef Name="AccounTicketId" />
+          </Key>
+          <Property Name="AccounTicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="TicketId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_AccountAccountTicket" FromRole="AccountTickets" ToRole="Accounts" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketAccountTicket" FromRole="AccountTickets" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="AuthenticationLog">
+          <Key>
+            <PropertyRef Name="AuthId" />
+          </Key>
+          <Property Name="AuthId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Success" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserIp" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Offset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Entitlement" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EntitlementGroup" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TargetName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerAuthenticationLogs" FromRole="AuthenticationLogs" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="ConfigId" />
+          </Key>
+          <Property Name="ConfigId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CustomerIOCEvent">
+          <Key>
+            <PropertyRef Name="CustomIOCEventId" />
+          </Key>
+          <Property Name="CustomIOCEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Offset" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="DetectionDeviceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerCustomerIOCEvent" FromRole="CustomerIOCEvents" ToRole="Customers" />
+          <NavigationProperty Name="DetectionDevice" Relationship="Self.FK_DetectionDeviceCustomerIOCEvent" FromRole="CustomerIOCEvents" ToRole="DetectionDevices" />
+          <Property Name="ProcessId" Type="String" Nullable="true" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ParentProcessId" Type="String" Nullable="true" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FileName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FilePath" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CommandLine" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="MD5String" Type="String" Nullable="true" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="IPv4" Type="String" Nullable="true" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="DomainName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerIdString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AuthenticationLogs" Relationship="Self.FK_CustomerAuthenticationLogs" FromRole="Customers" ToRole="AuthenticationLogs" />
+          <NavigationProperty Name="CustomerIOCEvents" Relationship="Self.FK_CustomerCustomerIOCEvent" FromRole="Customers" ToRole="CustomerIOCEvents" />
+          <NavigationProperty Name="Detections" Relationship="Self.FK_CustomerDetection" FromRole="Customers" ToRole="Detections" />
+          <NavigationProperty Name="UserActivityLogs" Relationship="Self.FK_CustomerDetectStatusLogs" FromRole="Customers" ToRole="UserActivityLogs" />
+        </EntityType>
+        <EntityType Name="DetectionDevice">
+          <Key>
+            <PropertyRef Name="DetectionDeviceId" />
+          </Key>
+          <Property Name="DetectionDeviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IPAddress" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CustomerIOCEvents" Relationship="Self.FK_DetectionDeviceCustomerIOCEvent" FromRole="DetectionDevices" ToRole="CustomerIOCEvents" />
+          <NavigationProperty Name="Detections" Relationship="Self.FK_DetectionDeviceDetection" FromRole="DetectionDevices" ToRole="Detections" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_DeviceDetectionDevice" FromRole="DetectionDevices" ToRole="Devices" />
+        </EntityType>
+        <EntityType Name="Detection">
+          <Key>
+            <PropertyRef Name="DetectionId" />
+          </Key>
+          <Property Name="DetectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProcessStartTime" Type="DateTime" Precision="3" />
+          <Property Name="ProcessEndTime" Type="DateTime" Precision="3" />
+          <Property Name="CommandLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FalconHostLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SHA256" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MD5" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SHA1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AVDetections" Type="Boolean" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="3" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="DetectionDeviceId" Type="Int32" Nullable="false" />
+          <Property Name="Offset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProcessId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentProcessId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="VendorSeverityId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CustomSeverityId" Type="Int32" Nullable="false" />
+          <Property Name="ResponderId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_AccountEvents" FromRole="Detections" ToRole="Accounts" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerDetection" FromRole="Detections" ToRole="Customers" />
+          <NavigationProperty Name="DetectionDevice" Relationship="Self.FK_DetectionDeviceDetection" FromRole="Detections" ToRole="DetectionDevices" />
+          <NavigationProperty Name="DetectionTaxonomies" Relationship="Self.FK_DetectionDetectionTaxonomies" FromRole="Detections" ToRole="DetectionTaxonomies" />
+          <NavigationProperty Name="DnsRequests" Relationship="Self.FK_DetectionDnsRequests" FromRole="Detections" ToRole="DnsRequests" />
+          <NavigationProperty Name="DocumentsAccesses" Relationship="Self.FK_DetectionDocumentsAccessed" FromRole="Detections" ToRole="DocumentsAccesses" />
+          <NavigationProperty Name="DetectionTags" Relationship="Self.FK_DetectionEventTags" FromRole="Detections" ToRole="DetectionTags" />
+          <NavigationProperty Name="ExecutablesWrittens" Relationship="Self.FK_DetectionExecutablesWritten" FromRole="Detections" ToRole="ExecutablesWrittens" />
+          <NavigationProperty Name="NetworkAccesses" Relationship="Self.FK_DetectionNetworkAccesses" FromRole="Detections" ToRole="NetworkAccesses" />
+          <NavigationProperty Name="ScanResults" Relationship="Self.FK_DetectionScanResults" FromRole="Detections" ToRole="ScanResults" />
+          <NavigationProperty Name="DetectionTickets" Relationship="Self.FK_DetectionTicketEvent" FromRole="Detections" ToRole="DetectionTickets" />
+          <NavigationProperty Name="Responder" Relationship="Self.FK_ResponderDetection" FromRole="Detections" ToRole="Responders" />
+          <NavigationProperty Name="Severity" Relationship="Self.FK_SeverityDetection" FromRole="Detections" ToRole="Severities" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_StatusDetection" FromRole="Detections" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="DetectionTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionEventTags" FromRole="DetectionTags" ToRole="Detections" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_TagEventTags" FromRole="DetectionTags" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="DetectionTaxonomy">
+          <Key>
+            <PropertyRef Name="DetectTaxId" />
+          </Key>
+          <Property Name="DetectTaxId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <Property Name="TaxonomyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionDetectionTaxonomies" FromRole="DetectionTaxonomies" ToRole="Detections" />
+          <NavigationProperty Name="Taxonomy" Relationship="Self.FK_TaxonomyDetectionTaxonomies" FromRole="DetectionTaxonomies" ToRole="Taxonomies" />
+        </EntityType>
+        <EntityType Name="DetectionTicket">
+          <Key>
+            <PropertyRef Name="DetectionTicketId" />
+          </Key>
+          <Property Name="DetectionTicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <Property Name="TicketId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionTicketEvent" FromRole="DetectionTickets" ToRole="Detections" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketDetectionTicket" FromRole="DetectionTickets" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="DeviceId" />
+          </Key>
+          <Property Name="DeviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hostname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Domain" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SensorId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DetectionDevices" Relationship="Self.FK_DeviceDetectionDevice" FromRole="Devices" ToRole="DetectionDevices" />
+          <NavigationProperty Name="DeviceTickets" Relationship="Self.FK_DeviceDeviceTicket" FromRole="Devices" ToRole="DeviceTickets" />
+        </EntityType>
+        <EntityType Name="DeviceTicket">
+          <Key>
+            <PropertyRef Name="DeviceTicketId" />
+          </Key>
+          <Property Name="DeviceTicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceId" Type="Int32" Nullable="false" />
+          <Property Name="TicketId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_DeviceDeviceTicket" FromRole="DeviceTickets" ToRole="Devices" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketDeviceTicket" FromRole="DeviceTickets" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="DnsRequest">
+          <Key>
+            <PropertyRef Name="DnsRequestId" />
+          </Key>
+          <Property Name="DnsRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CausedDetect" Type="Boolean" Nullable="false" />
+          <Property Name="DomainName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InterfaceIndex" Type="Int32" Nullable="false" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionDnsRequests" FromRole="DnsRequests" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="DocumentsAccess">
+          <Key>
+            <PropertyRef Name="DocAccessedId" />
+          </Key>
+          <Property Name="DocAccessedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionDocumentsAccessed" FromRole="DocumentsAccesses" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="ExecutablesWritten">
+          <Key>
+            <PropertyRef Name="ExeWrittenId" />
+          </Key>
+          <Property Name="ExeWrittenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionExecutablesWritten" FromRole="ExecutablesWrittens" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AccountGroups" Relationship="Self.FK_GroupsAccountGroups" FromRole="Groups" ToRole="AccountGroups" />
+        </EntityType>
+        <EntityType Name="NetworkAccess">
+          <Key>
+            <PropertyRef Name="NetAccessId" />
+          </Key>
+          <Property Name="NetAccessId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccessType" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionDirection" Type="Int32" Nullable="false" />
+          <Property Name="IsIPv6" Type="Boolean" Nullable="false" />
+          <Property Name="LocalAddress" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocalPort" Type="Int32" Nullable="false" />
+          <Property Name="RemoteAddress" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RemotePort" Type="Int32" Nullable="false" />
+          <Property Name="Protocol" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionNetworkAccesses" FromRole="NetworkAccesses" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="Responder">
+          <Key>
+            <PropertyRef Name="ResponderId" />
+          </Key>
+          <Property Name="ResponderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Detections" Relationship="Self.FK_ResponderDetection" FromRole="Responders" ToRole="Detections" />
+          <NavigationProperty Name="ResponderSchedules" Relationship="Self.FK_ResponderResponderSchedule" FromRole="Responders" ToRole="ResponderSchedules" />
+        </EntityType>
+        <EntityType Name="ResponderSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayOfWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ResponderId" Type="Int32" />
+          <NavigationProperty Name="Responder" Relationship="Self.FK_ResponderResponderSchedule" FromRole="ResponderSchedules" ToRole="Responders" />
+        </EntityType>
+        <EntityType Name="ScanResult">
+          <Key>
+            <PropertyRef Name="ScanResultId" />
+          </Key>
+          <Property Name="ScanResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Engine" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ResultName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DetectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detection" Relationship="Self.FK_DetectionScanResults" FromRole="ScanResults" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="Severity">
+          <Key>
+            <PropertyRef Name="SeverityId" />
+          </Key>
+          <Property Name="SeverityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeverityType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Detections" Relationship="Self.FK_SeverityDetection" FromRole="Severities" ToRole="Detections" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_SeverityTicket" FromRole="Severities" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Detections" Relationship="Self.FK_StatusDetection" FromRole="Status" ToRole="Detections" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DetectionTags" Relationship="Self.FK_TagEventTags" FromRole="Tags" ToRole="DetectionTags" />
+        </EntityType>
+        <EntityType Name="Taxonomy">
+          <Key>
+            <PropertyRef Name="TaxonomyId" />
+          </Key>
+          <Property Name="TaxonomyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Creator" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Critical" Type="Boolean" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaxTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetectionTaxonomies" Relationship="Self.FK_TaxonomyDetectionTaxonomies" FromRole="Taxonomies" ToRole="DetectionTaxonomies" />
+          <NavigationProperty Name="TaxonomyType" Relationship="Self.FK_TaxonomyTypesTaxonomy" FromRole="Taxonomies" ToRole="TaxonomyTypes" />
+        </EntityType>
+        <EntityType Name="TaxonomyType">
+          <Key>
+            <PropertyRef Name="TaxTypeId" />
+          </Key>
+          <Property Name="TaxTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Taxonomies" Relationship="Self.FK_TaxonomyTypesTaxonomy" FromRole="TaxonomyTypes" ToRole="Taxonomies" />
+        </EntityType>
+        <EntityType Name="TicketRecipient">
+          <Key>
+            <PropertyRef Name="TicketRecipientId" />
+          </Key>
+          <Property Name="TicketRecipientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_TicketRecipientTicket" FromRole="TicketRecipients" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="TicketId" />
+          </Key>
+          <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExternalTicket" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Creator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DispatchDate" Type="DateTime" Precision="3" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="TicketRecipientId" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SeverityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountTickets" Relationship="Self.FK_TicketAccountTicket" FromRole="Tickets" ToRole="AccountTickets" />
+          <NavigationProperty Name="DetectionTickets" Relationship="Self.FK_TicketDetectionTicket" FromRole="Tickets" ToRole="DetectionTickets" />
+          <NavigationProperty Name="DeviceTickets" Relationship="Self.FK_TicketDeviceTicket" FromRole="Tickets" ToRole="DeviceTickets" />
+          <NavigationProperty Name="Severity" Relationship="Self.FK_SeverityTicket" FromRole="Tickets" ToRole="Severities" />
+          <NavigationProperty Name="TicketRecipient" Relationship="Self.FK_TicketRecipientTicket" FromRole="Tickets" ToRole="TicketRecipients" />
+        </EntityType>
+        <EntityType Name="UserActivityLog">
+          <Key>
+            <PropertyRef Name="UserActivityLogId" />
+          </Key>
+          <Property Name="UserActivityLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Success" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserIp" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Offset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DetectId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerDetectStatusLogs" FromRole="UserActivityLogs" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Whitelist">
+          <Key>
+            <PropertyRef Name="WhitelistId" />
+          </Key>
+          <Property Name="WhitelistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Creator" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WhitelistTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WhitelistType" Relationship="Self.FK_WhitelistTypeWhitelist" FromRole="Whitelists" ToRole="WhitelistTypes" />
+        </EntityType>
+        <EntityType Name="WhitelistType">
+          <Key>
+            <PropertyRef Name="WhitelistTypeId" />
+          </Key>
+          <Property Name="WhitelistTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Whitelists" Relationship="Self.FK_WhitelistTypeWhitelist" FromRole="WhitelistTypes" ToRole="Whitelists" />
+        </EntityType>
+        <Association Name="FK_AccountAccountGroups">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="AccountGroups" Type="Self.AccountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="AccountGroups">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupsAccountGroups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="AccountGroups" Type="Self.AccountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="AccountGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountAccountTicket">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="AccountTickets" Type="Self.AccountTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="AccountTickets">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountEvents">
+          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketAccountTicket">
+          <End Role="Tickets" Type="Self.Ticket" Multiplicity="1" />
+          <End Role="AccountTickets" Type="Self.AccountTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="AccountTickets">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAuthenticationLogs">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="AuthenticationLogs" Type="Self.AuthenticationLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="AuthenticationLogs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerCustomerIOCEvent">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerIOCEvents" Type="Self.CustomerIOCEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerIOCEvents">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDeviceCustomerIOCEvent">
+          <End Role="DetectionDevices" Type="Self.DetectionDevice" Multiplicity="1" />
+          <End Role="CustomerIOCEvents" Type="Self.CustomerIOCEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetectionDevices">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Principal>
+            <Dependent Role="CustomerIOCEvents">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetection">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDetectStatusLogs">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="UserActivityLogs" Type="Self.UserActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="UserActivityLogs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDeviceDetection">
+          <End Role="DetectionDevices" Type="Self.DetectionDevice" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetectionDevices">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="DetectionDeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDetectionDevice">
+          <End Role="Devices" Type="Self.Device" Multiplicity="1" />
+          <End Role="DetectionDevices" Type="Self.DetectionDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="DetectionDevices">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDetectionTaxonomies">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="DetectionTaxonomies" Type="Self.DetectionTaxonomy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DetectionTaxonomies">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDnsRequests">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="DnsRequests" Type="Self.DnsRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DnsRequests">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionDocumentsAccessed">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="DocumentsAccesses" Type="Self.DocumentsAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DocumentsAccesses">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionEventTags">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="DetectionTags" Type="Self.DetectionTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DetectionTags">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionExecutablesWritten">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="ExecutablesWrittens" Type="Self.ExecutablesWritten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="ExecutablesWrittens">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionNetworkAccesses">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="NetworkAccesses" Type="Self.NetworkAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="NetworkAccesses">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionScanResults">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="ScanResults" Type="Self.ScanResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="ScanResults">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetectionTicketEvent">
+          <End Role="Detections" Type="Self.Detection" Multiplicity="1" />
+          <End Role="DetectionTickets" Type="Self.DetectionTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detections">
+              <PropertyRef Name="DetectionId" />
+            </Principal>
+            <Dependent Role="DetectionTickets">
+              <PropertyRef Name="DetectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponderDetection">
+          <End Role="Responders" Type="Self.Responder" Multiplicity="0..1" />
+          <End Role="Detections" Type="Self.Detection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responders">
+              <PropertyRef Name="ResponderId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="ResponderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeverityDetection">
+          <End Role="Severities" Type="Self.Severity" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Severities">
+              <PropertyRef Name="SeverityId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="CustomSeverityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatusDetection">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Detections" Type="Self.Detection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Detections">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagEventTags">
+          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
+          <End Role="DetectionTags" Type="Self.DetectionTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="DetectionTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxonomyDetectionTaxonomies">
+          <End Role="Taxonomies" Type="Self.Taxonomy" Multiplicity="1" />
+          <End Role="DetectionTaxonomies" Type="Self.DetectionTaxonomy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taxonomies">
+              <PropertyRef Name="TaxonomyId" />
+            </Principal>
+            <Dependent Role="DetectionTaxonomies">
+              <PropertyRef Name="TaxonomyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketDetectionTicket">
+          <End Role="Tickets" Type="Self.Ticket" Multiplicity="1" />
+          <End Role="DetectionTickets" Type="Self.DetectionTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="DetectionTickets">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeviceDeviceTicket">
+          <End Role="Devices" Type="Self.Device" Multiplicity="1" />
+          <End Role="DeviceTickets" Type="Self.DeviceTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="DeviceTickets">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketDeviceTicket">
+          <End Role="Tickets" Type="Self.Ticket" Multiplicity="1" />
+          <End Role="DeviceTickets" Type="Self.DeviceTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="DeviceTickets">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponderResponderSchedule">
+          <End Role="Responders" Type="Self.Responder" Multiplicity="0..1" />
+          <End Role="ResponderSchedules" Type="Self.ResponderSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responders">
+              <PropertyRef Name="ResponderId" />
+            </Principal>
+            <Dependent Role="ResponderSchedules">
+              <PropertyRef Name="ResponderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeverityTicket">
+          <End Role="Severities" Type="Self.Severity" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Severities">
+              <PropertyRef Name="SeverityId" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="SeverityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxonomyTypesTaxonomy">
+          <End Role="TaxonomyTypes" Type="Self.TaxonomyType" Multiplicity="1" />
+          <End Role="Taxonomies" Type="Self.Taxonomy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxonomyTypes">
+              <PropertyRef Name="TaxTypeId" />
+            </Principal>
+            <Dependent Role="Taxonomies">
+              <PropertyRef Name="TaxTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketRecipientTicket">
+          <End Role="TicketRecipients" Type="Self.TicketRecipient" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketRecipients">
+              <PropertyRef Name="TicketRecipientId" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="TicketRecipientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WhitelistTypeWhitelist">
+          <End Role="WhitelistTypes" Type="Self.WhitelistType" Multiplicity="1" />
+          <End Role="Whitelists" Type="Self.Whitelist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WhitelistTypes">
+              <PropertyRef Name="WhitelistTypeId" />
+            </Principal>
+            <Dependent Role="Whitelists">
+              <PropertyRef Name="WhitelistTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FalconOrchestratorDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountGroups" EntityType="Self.AccountGroup" />
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountTickets" EntityType="Self.AccountTicket" />
+          <EntitySet Name="AuthenticationLogs" EntityType="Self.AuthenticationLog" />
+          <EntitySet Name="Configurations" EntityType="Self.Configuration" />
+          <EntitySet Name="CustomerIOCEvents" EntityType="Self.CustomerIOCEvent" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DetectionDevices" EntityType="Self.DetectionDevice" />
+          <EntitySet Name="Detections" EntityType="Self.Detection" />
+          <EntitySet Name="DetectionTags" EntityType="Self.DetectionTag" />
+          <EntitySet Name="DetectionTaxonomies" EntityType="Self.DetectionTaxonomy" />
+          <EntitySet Name="DetectionTickets" EntityType="Self.DetectionTicket" />
+          <EntitySet Name="Devices" EntityType="Self.Device" />
+          <EntitySet Name="DeviceTickets" EntityType="Self.DeviceTicket" />
+          <EntitySet Name="DnsRequests" EntityType="Self.DnsRequest" />
+          <EntitySet Name="DocumentsAccesses" EntityType="Self.DocumentsAccess" />
+          <EntitySet Name="ExecutablesWrittens" EntityType="Self.ExecutablesWritten" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="NetworkAccesses" EntityType="Self.NetworkAccess" />
+          <EntitySet Name="Responders" EntityType="Self.Responder" />
+          <EntitySet Name="ResponderSchedules" EntityType="Self.ResponderSchedule" />
+          <EntitySet Name="ScanResults" EntityType="Self.ScanResult" />
+          <EntitySet Name="Severities" EntityType="Self.Severity" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="Taxonomies" EntityType="Self.Taxonomy" />
+          <EntitySet Name="TaxonomyTypes" EntityType="Self.TaxonomyType" />
+          <EntitySet Name="TicketRecipients" EntityType="Self.TicketRecipient" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <EntitySet Name="UserActivityLogs" EntityType="Self.UserActivityLog" />
+          <EntitySet Name="Whitelists" EntityType="Self.Whitelist" />
+          <EntitySet Name="WhitelistTypes" EntityType="Self.WhitelistType" />
+          <AssociationSet Name="FK_AccountAccountGroups" Association="Self.FK_AccountAccountGroups">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountGroups" EntitySet="AccountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupsAccountGroups" Association="Self.FK_GroupsAccountGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="AccountGroups" EntitySet="AccountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountAccountTicket" Association="Self.FK_AccountAccountTicket">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountTickets" EntitySet="AccountTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountEvents" Association="Self.FK_AccountEvents">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketAccountTicket" Association="Self.FK_TicketAccountTicket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="AccountTickets" EntitySet="AccountTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAuthenticationLogs" Association="Self.FK_CustomerAuthenticationLogs">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="AuthenticationLogs" EntitySet="AuthenticationLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCustomerIOCEvent" Association="Self.FK_CustomerCustomerIOCEvent">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerIOCEvents" EntitySet="CustomerIOCEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDeviceCustomerIOCEvent" Association="Self.FK_DetectionDeviceCustomerIOCEvent">
+            <End Role="DetectionDevices" EntitySet="DetectionDevices" />
+            <End Role="CustomerIOCEvents" EntitySet="CustomerIOCEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetection" Association="Self.FK_CustomerDetection">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDetectStatusLogs" Association="Self.FK_CustomerDetectStatusLogs">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="UserActivityLogs" EntitySet="UserActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDeviceDetection" Association="Self.FK_DetectionDeviceDetection">
+            <End Role="DetectionDevices" EntitySet="DetectionDevices" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDetectionDevice" Association="Self.FK_DeviceDetectionDevice">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="DetectionDevices" EntitySet="DetectionDevices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDetectionTaxonomies" Association="Self.FK_DetectionDetectionTaxonomies">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DetectionTaxonomies" EntitySet="DetectionTaxonomies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDnsRequests" Association="Self.FK_DetectionDnsRequests">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DnsRequests" EntitySet="DnsRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionDocumentsAccessed" Association="Self.FK_DetectionDocumentsAccessed">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DocumentsAccesses" EntitySet="DocumentsAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionEventTags" Association="Self.FK_DetectionEventTags">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DetectionTags" EntitySet="DetectionTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionExecutablesWritten" Association="Self.FK_DetectionExecutablesWritten">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="ExecutablesWrittens" EntitySet="ExecutablesWrittens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionNetworkAccesses" Association="Self.FK_DetectionNetworkAccesses">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="NetworkAccesses" EntitySet="NetworkAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionScanResults" Association="Self.FK_DetectionScanResults">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="ScanResults" EntitySet="ScanResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetectionTicketEvent" Association="Self.FK_DetectionTicketEvent">
+            <End Role="Detections" EntitySet="Detections" />
+            <End Role="DetectionTickets" EntitySet="DetectionTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponderDetection" Association="Self.FK_ResponderDetection">
+            <End Role="Responders" EntitySet="Responders" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeverityDetection" Association="Self.FK_SeverityDetection">
+            <End Role="Severities" EntitySet="Severities" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatusDetection" Association="Self.FK_StatusDetection">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Detections" EntitySet="Detections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagEventTags" Association="Self.FK_TagEventTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="DetectionTags" EntitySet="DetectionTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxonomyDetectionTaxonomies" Association="Self.FK_TaxonomyDetectionTaxonomies">
+            <End Role="Taxonomies" EntitySet="Taxonomies" />
+            <End Role="DetectionTaxonomies" EntitySet="DetectionTaxonomies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketDetectionTicket" Association="Self.FK_TicketDetectionTicket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="DetectionTickets" EntitySet="DetectionTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeviceDeviceTicket" Association="Self.FK_DeviceDeviceTicket">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="DeviceTickets" EntitySet="DeviceTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketDeviceTicket" Association="Self.FK_TicketDeviceTicket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="DeviceTickets" EntitySet="DeviceTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponderResponderSchedule" Association="Self.FK_ResponderResponderSchedule">
+            <End Role="Responders" EntitySet="Responders" />
+            <End Role="ResponderSchedules" EntitySet="ResponderSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeverityTicket" Association="Self.FK_SeverityTicket">
+            <End Role="Severities" EntitySet="Severities" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxonomyTypesTaxonomy" Association="Self.FK_TaxonomyTypesTaxonomy">
+            <End Role="TaxonomyTypes" EntitySet="TaxonomyTypes" />
+            <End Role="Taxonomies" EntitySet="Taxonomies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketRecipientTicket" Association="Self.FK_TicketRecipientTicket">
+            <End Role="TicketRecipients" EntitySet="TicketRecipients" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WhitelistTypeWhitelist" Association="Self.FK_WhitelistTypeWhitelist">
+            <End Role="WhitelistTypes" EntitySet="WhitelistTypes" />
+            <End Role="Whitelists" EntitySet="Whitelists" />
+          </AssociationSet>
+          <EntitySet Name="v_DetectionAverages" EntityType="FalconOrchestratorModel.v_DetectionAverages" />
+        </EntityContainer>
+        <EntityType Name="v_DetectionAverages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Daily" Type="Int32" />
+          <Property Name="Weekly" Type="Int32" />
+          <Property Name="Monthly" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FalconOrchestratorModelStoreContainer" CdmEntityContainer="FalconOrchestratorDB">
+    <EntitySetMapping Name="AccountGroups">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.AccountGroup)">
+        <MappingFragment StoreEntitySet="AccountGroups">
+          <ScalarProperty Name="AccountGroupId" ColumnName="AccountGroupId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="Manager" ColumnName="Manager" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="StateProvince" ColumnName="StateProvince" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+          <ScalarProperty Name="LastLogon" ColumnName="LastLogon" />
+          <ScalarProperty Name="OrganizationalUnit" ColumnName="OrganizationalUnit" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountTickets">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.AccountTicket)">
+        <MappingFragment StoreEntitySet="AccountTickets">
+          <ScalarProperty Name="AccounTicketId" ColumnName="AccounTicketId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthenticationLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.AuthenticationLog)">
+        <MappingFragment StoreEntitySet="AuthenticationLogs">
+          <ScalarProperty Name="AuthId" ColumnName="AuthId" />
+          <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserIp" ColumnName="UserIp" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Offset" ColumnName="Offset" />
+          <ScalarProperty Name="Entitlement" ColumnName="Entitlement" />
+          <ScalarProperty Name="EntitlementGroup" ColumnName="EntitlementGroup" />
+          <ScalarProperty Name="TargetName" ColumnName="TargetName" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configurations">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Configuration)">
+        <MappingFragment StoreEntitySet="Configurations">
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerIOCEvents">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.CustomerIOCEvent)">
+        <MappingFragment StoreEntitySet="CustomerIOCEvents">
+          <ScalarProperty Name="CustomIOCEventId" ColumnName="CustomIOCEventId" />
+          <ScalarProperty Name="Offset" ColumnName="Offset" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="DetectionDeviceId" ColumnName="DetectionDeviceId" />
+          <ScalarProperty Name="ProcessId" ColumnName="ProcessId" />
+          <ScalarProperty Name="ParentProcessId" ColumnName="ParentProcessId" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="CommandLine" ColumnName="CommandLine" />
+          <ScalarProperty Name="MD5String" ColumnName="MD5String" />
+          <ScalarProperty Name="IPv4" ColumnName="IPv4" />
+          <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerIdString" ColumnName="CustomerIdString" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetectionDevices">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DetectionDevice)">
+        <MappingFragment StoreEntitySet="DetectionDevices">
+          <ScalarProperty Name="DetectionDeviceId" ColumnName="DetectionDeviceId" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detections">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Detection)">
+        <MappingFragment StoreEntitySet="Detections">
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="ProcessStartTime" ColumnName="ProcessStartTime" />
+          <ScalarProperty Name="ProcessEndTime" ColumnName="ProcessEndTime" />
+          <ScalarProperty Name="CommandLine" ColumnName="CommandLine" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FalconHostLink" ColumnName="FalconHostLink" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SHA256" ColumnName="SHA256" />
+          <ScalarProperty Name="MD5" ColumnName="MD5" />
+          <ScalarProperty Name="SHA1" ColumnName="SHA1" />
+          <ScalarProperty Name="AVDetections" ColumnName="AVDetections" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="DetectionDeviceId" ColumnName="DetectionDeviceId" />
+          <ScalarProperty Name="Offset" ColumnName="Offset" />
+          <ScalarProperty Name="ProcessId" ColumnName="ProcessId" />
+          <ScalarProperty Name="ParentProcessId" ColumnName="ParentProcessId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="VendorSeverityId" ColumnName="VendorSeverityId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomSeverityId" ColumnName="CustomSeverityId" />
+          <ScalarProperty Name="ResponderId" ColumnName="ResponderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetectionTags">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DetectionTag)">
+        <MappingFragment StoreEntitySet="DetectionTags">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetectionTaxonomies">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DetectionTaxonomy)">
+        <MappingFragment StoreEntitySet="DetectionTaxonomies">
+          <ScalarProperty Name="DetectTaxId" ColumnName="DetectTaxId" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+          <ScalarProperty Name="TaxonomyId" ColumnName="TaxonomyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetectionTickets">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DetectionTicket)">
+        <MappingFragment StoreEntitySet="DetectionTickets">
+          <ScalarProperty Name="DetectionTicketId" ColumnName="DetectionTicketId" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Devices">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Device)">
+        <MappingFragment StoreEntitySet="Devices">
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="Hostname" ColumnName="Hostname" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="SensorId" ColumnName="SensorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceTickets">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DeviceTicket)">
+        <MappingFragment StoreEntitySet="DeviceTickets">
+          <ScalarProperty Name="DeviceTicketId" ColumnName="DeviceTicketId" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DnsRequests">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DnsRequest)">
+        <MappingFragment StoreEntitySet="DnsRequests">
+          <ScalarProperty Name="DnsRequestId" ColumnName="DnsRequestId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="CausedDetect" ColumnName="CausedDetect" />
+          <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+          <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+          <ScalarProperty Name="InterfaceIndex" ColumnName="InterfaceIndex" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentsAccesses">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.DocumentsAccess)">
+        <MappingFragment StoreEntitySet="DocumentsAccesses">
+          <ScalarProperty Name="DocAccessedId" ColumnName="DocAccessedId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExecutablesWrittens">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.ExecutablesWritten)">
+        <MappingFragment StoreEntitySet="ExecutablesWrittens">
+          <ScalarProperty Name="ExeWrittenId" ColumnName="ExeWrittenId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NetworkAccesses">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.NetworkAccess)">
+        <MappingFragment StoreEntitySet="NetworkAccesses">
+          <ScalarProperty Name="NetAccessId" ColumnName="NetAccessId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="AccessType" ColumnName="AccessType" />
+          <ScalarProperty Name="ConnectionDirection" ColumnName="ConnectionDirection" />
+          <ScalarProperty Name="IsIPv6" ColumnName="IsIPv6" />
+          <ScalarProperty Name="LocalAddress" ColumnName="LocalAddress" />
+          <ScalarProperty Name="LocalPort" ColumnName="LocalPort" />
+          <ScalarProperty Name="RemoteAddress" ColumnName="RemoteAddress" />
+          <ScalarProperty Name="RemotePort" ColumnName="RemotePort" />
+          <ScalarProperty Name="Protocol" ColumnName="Protocol" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responders">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Responder)">
+        <MappingFragment StoreEntitySet="Responders">
+          <ScalarProperty Name="ResponderId" ColumnName="ResponderId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResponderSchedules">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.ResponderSchedule)">
+        <MappingFragment StoreEntitySet="ResponderSchedules">
+          <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+          <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+          <ScalarProperty Name="ResponderId" ColumnName="ResponderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScanResults">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.ScanResult)">
+        <MappingFragment StoreEntitySet="ScanResults">
+          <ScalarProperty Name="ScanResultId" ColumnName="ScanResultId" />
+          <ScalarProperty Name="Engine" ColumnName="Engine" />
+          <ScalarProperty Name="ResultName" ColumnName="ResultName" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="DetectionId" ColumnName="DetectionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Severities">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Severity)">
+        <MappingFragment StoreEntitySet="Severities">
+          <ScalarProperty Name="SeverityId" ColumnName="SeverityId" />
+          <ScalarProperty Name="SeverityType" ColumnName="SeverityType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Status)">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="StatusType" ColumnName="StatusType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Tag)">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taxonomies">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Taxonomy)">
+        <MappingFragment StoreEntitySet="Taxonomies">
+          <ScalarProperty Name="TaxonomyId" ColumnName="TaxonomyId" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Critical" ColumnName="Critical" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="TaxTypeId" ColumnName="TaxTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxonomyTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.TaxonomyType)">
+        <MappingFragment StoreEntitySet="TaxonomyTypes">
+          <ScalarProperty Name="TaxTypeId" ColumnName="TaxTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketRecipients">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.TicketRecipient)">
+        <MappingFragment StoreEntitySet="TicketRecipients">
+          <ScalarProperty Name="TicketRecipientId" ColumnName="TicketRecipientId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Ticket)">
+        <MappingFragment StoreEntitySet="Tickets">
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="ExternalTicket" ColumnName="ExternalTicket" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="DispatchDate" ColumnName="DispatchDate" />
+          <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+          <ScalarProperty Name="TicketRecipientId" ColumnName="TicketRecipientId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="SeverityId" ColumnName="SeverityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserActivityLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.UserActivityLog)">
+        <MappingFragment StoreEntitySet="UserActivityLogs">
+          <ScalarProperty Name="UserActivityLogId" ColumnName="UserActivityLogId" />
+          <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserIp" ColumnName="UserIp" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Offset" ColumnName="Offset" />
+          <ScalarProperty Name="DetectId" ColumnName="DetectId" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Whitelists">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.Whitelist)">
+        <MappingFragment StoreEntitySet="Whitelists">
+          <ScalarProperty Name="WhitelistId" ColumnName="WhitelistId" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="WhitelistTypeId" ColumnName="WhitelistTypeId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WhitelistTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(FalconOrchestratorModel.WhitelistType)">
+        <MappingFragment StoreEntitySet="WhitelistTypes">
+          <ScalarProperty Name="WhitelistTypeId" ColumnName="WhitelistTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="v_DetectionAverages">
+            <EntityTypeMapping TypeName="FalconOrchestratorModel.v_DetectionAverages">
+              <MappingFragment StoreEntitySet="v_DetectionAverages">
+                <ScalarProperty Name="Monthly" ColumnName="Monthly" />
+                <ScalarProperty Name="Weekly" ColumnName="Weekly" />
+                <ScalarProperty Name="Daily" ColumnName="Daily" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

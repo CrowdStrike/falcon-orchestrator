@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A894800B-65EF-4379-8966-D5BB9EA37C53}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FalconOrchestrator.DAL</RootNamespace>
+    <AssemblyName>FalconOrchestrator.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountGroup.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountTicket.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationLog.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppConfiguration.cs" />
+    <Compile Include="Configuration.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerIOCEvent.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Detection.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetectionDevice.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetectionTag.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetectionTaxonomy.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetectionTicket.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Device.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceTicket.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DnsRequest.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentsAccess.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExecutablesWritten.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FalconOrchestratorDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FalconOrchestratorDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FalconOrchestratorDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FalconOrchestratorDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FalconOrchestratorDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Group.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="NetworkAccess.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Responder.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResponderSchedule.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScanResult.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Severity.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Status.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tag.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Taxonomy.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaxonomyType.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketRecipient.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserActivityLog.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_DetectionAverages.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Whitelist.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WhitelistType.cs">
+      <DependentUpon>FalconOrchestratorDB.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="FalconOrchestratorDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FalconOrchestratorDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="FalconOrchestratorDB.edmx.diagram">
+      <DependentUpon>FalconOrchestratorDB.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FalconOrchestratorDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FalconOrchestratorDB.edmx</DependentUpon>
+      <LastGenOutput>FalconOrchestratorDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FalconOrchestratorDB.edmx.sql" />
+    <Content Include="FalconOrchestratorDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FalconOrchestratorDB.edmx</DependentUpon>
+      <LastGenOutput>FalconOrchestratorDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

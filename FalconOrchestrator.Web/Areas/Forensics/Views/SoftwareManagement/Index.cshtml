@@ -1,0 +1,29 @@
+﻿@model FalconOrchestratorWeb.Areas.Forensics.Models.SoftwareInventoryViewModel
+@using (Ajax.BeginForm("ListInstalled", "SoftwareManagement", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "software-list" }))
+{
+<div class="container">
+    <h1>Software Inventory</h1>
+    <br />
+    <p>
+        Query a system below to identify what software and versions are installed.
+        This is based off the values stored within the target systems registry
+        keys in HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall.
+    </p>
+    <div class="row" id="responseMessages"></div>
+    <hr />
+    <div class="well">
+        <div class="form">
+            <div class="form-group">
+                @Html.Label("Computer", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.ComputerName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.ComputerName)
+            </div>
+            <button type="submit" class="btn btn-default btn-success">
+                <i class="fa fa-search"></i> Search
+            </button>
+          </div>
+     </div>
+    <br />
+    <div class="row" id="software-list"></div>
+</div>
+}

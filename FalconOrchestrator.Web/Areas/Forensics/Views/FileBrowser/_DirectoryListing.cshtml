@@ -1,0 +1,114 @@
+﻿@model IEnumerable<FalconOrchestrator.Forensics.FileMetadata>
+<table id="datatable" class="table table-hover table-bordered dt-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("Extension")
+            </th>
+            <th>
+                @Html.DisplayName("Length (Bytes)")
+            </th>
+            <th>
+                @Html.DisplayName("Attributes")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Creation Time")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Last Access Time")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Last Modification Time")
+            </th>
+            <th>
+                @Html.DisplayName("Full Path")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attributes)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(modelItem => item.CreationTime)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(modelItem => item.LastAccessTime)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(modelItem => item.LastWriteTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $originalVal = $('#targetDirPath').val();
+        $table = $('#datatable').DataTable({
+            "order": [[0, "asc"]],
+            "pagingType": "simple_numbers",
+            "columnDefs": [{ "className": "hidden", "targets": [7,1,2] }]
+        });
+
+        $('#datatable tbody').on('click', 'tr', function () {
+
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+
+                if ($('#retrieve-file').length != 0) {
+                    $('#retrieve-file').detach();
+                }
+                $('#targetDirPath').val($originalVal);
+            }
+
+            else {
+                $table.$('tr.active').removeClass('active');
+                $(this).addClass('active');
+
+                var $attribs = $.trim($(this).find('td:eq(3)').text());
+                var $fullPath = $.trim($(this).find('td:eq(7)').text());
+
+                if ($attribs.indexOf("Directory") >= 0) {
+                    $('#targetDirPath').val($fullPath);
+                    if ($('#retrieve-file').length != 0) {
+                        $('#retrieve-file').detach();
+                    }
+                }
+
+                else {
+                    var $computerName = $('#targetComputerName').val();
+                    var $fileName = $.trim($('table > tbody > tr.active >td:eq(0)').text());
+                    var $filePath = $.trim($('table > tbody > tr.active >td:eq(7)').text());
+
+
+                    if ($('#retrieve-file').length == 0) {
+                        $('#get-file').append("<a class=\"btn btn-default btn-success\" id=\"retrieve-file\" data-ajax=\"true\" data-ajax-method=\"GET\" data-ajax-mode=\"replace\" data-ajax-success=\"downloadFile('" + $fileName + "')\" data-ajax-update=\"#messages\" href=\"/FileExtraction/InvokeFromBrowser?computerName=" + $computerName + "&filePath=" + $filePath + "\"><i class=\"fa fa-download\"></i> Download</a>");
+
+                    }
+                }
+            }
+        });
+    });
+    function downloadFile(fileName) {
+        window.location = '/forensics/file-extraction/downloadfile?fileName=' + fileName;
+    }
+</script>

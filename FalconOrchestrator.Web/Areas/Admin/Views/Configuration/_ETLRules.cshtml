@@ -1,0 +1,57 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.ETLRulesViewModel
+@using (Ajax.BeginForm("ETLRules", "Configuration", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-rules" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="result-rules" class="row col-12">
+    </div>
+    <div class="row col-12">
+        <h3>Processing Rules</h3>
+        <br />
+        <p>
+            These settings are used by the FalconHose client service.  If a rule is enabled, the associated action will be performed against each detection event consumed
+            from the FalconHose API stream.  Ensure that the necessary service account credentials are configured if you are enabled a rule that requires one.
+        </p>
+        <br />
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td class="config-label"><h4>Assign Responder</h4></td>
+                <td class="config-value">@Html.CheckBoxFor(model => model.AssignResponder, new { data_toggle = "toggle", data_width = 150, data_on = "Enabled", data_off = "Disabled"})</td>
+            </tr>
+            <tr>
+                <td class ="config-label"><h4>DNS Resolution</h4></td>
+                <td class="config-value">@Html.CheckBoxFor(model => model.DNSLookup, new { data_toggle = "toggle", data_width = 150, data_on = "Enabled", data_off = "Disabled"})</td>
+            </tr>
+            <tr>
+                <td class="config-label"><h4>Active Directory Lookup</h4></td>
+                <td class="config-value">@Html.CheckBoxFor(model => model.ADLookup, new { data_toggle = "toggle", data_width = 150, data_on = "Enabled",data_off="Disabled"})</td>
+            </tr>
+            <tr>
+                <td class="config-label"><h4>Taxonomize</h4></td>
+                <td class="config-value">@Html.CheckBoxFor(model => model.Taxonomize, new { data_toggle = "toggle", data_width = 150, data_on = "Enabled", data_off = "Disabled"})</td>
+            </tr>
+            <tr>
+                <td class ="config-label"><h4>Whitelisting</h4></td>
+                <td class="config-value">@Html.CheckBoxFor(model => model.Whitelisting, new { data_toggle = "toggle", data_width = 150, data_on = "Enabled", data_off = "Disabled"})</td>
+            </tr>
+            <tr>
+                <td class="config-label"><h4>Notification</h4></td>
+                <td class="config-value">@Html.CheckBoxFor(model => model.Notification, new { data_toggle = "toggle", data_width = 150, data_on = "Enabled", data_off = "Disabled"})</td>
+            </tr>
+            <tr>
+                <td class="config-label"><h4>Notification Threshold</h4></td>
+                <td class="config-value">@Html.DropDownListFor(x => x.NotificationThreshold, Model.SeverityList, String.Empty, new { @class = "form-control" })</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row col-8" style="margin-top:10px;">
+        <div class="form-group">
+            <div class="col-md-offset-6">
+                <button type="submit" class="btn btn-default btn-success">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+}

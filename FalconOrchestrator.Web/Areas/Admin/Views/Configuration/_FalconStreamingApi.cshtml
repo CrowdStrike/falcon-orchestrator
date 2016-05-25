@@ -1,0 +1,58 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.FalconStreamingAPIConfigViewModel
+@using (Ajax.BeginForm("FalconStreamingAPISettings", "Configuration", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-falconstream" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="result-falconstream" class="row col-12">
+    </div>
+    <div class="row col-12">
+        <h3>Falcon Streaming API Account</h3>
+        <br />
+        <p>
+            Provide URL and credentials for your Falcon Host API account.  This is used by the client service which connects to the
+            streaming API containing all detections data.
+        </p>
+        <br />
+    </div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-globe"></i> URL</span>
+            @Html.TextBoxFor(model => model.Url, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i> UUID</span>
+            @Html.TextBoxFor(model => model.Uuid, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-key"></i> Key</span>
+            @Html.PasswordFor(model => model.Key, new { @class = "form-control"})
+        </div>
+    </div>
+</div>
+<div class="row col-8">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-bookmark"></i> Offset</span>
+            @Html.TextBoxFor(model => model.Offset, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<br />
+<div class="row col-8" style="margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-6">
+            <button type="submit" class="btn btn-default btn-success">
+                <i class="fa fa-save"></i> Save
+            </button>
+        </div>
+    </div>
+</div>
+}

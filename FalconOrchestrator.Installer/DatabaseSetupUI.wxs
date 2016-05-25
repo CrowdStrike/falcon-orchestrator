@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <UI>
+      <Dialog Id="DatabaseDlg"  Width="370" Height="270" Title="Falcon Orchestrator Initialization Settings" NoMinimize="yes">
+        <Control Id="ServerNameLabel" Type="Text" X="45" Y="31" Width="220" Height="15" TabSkip="no" Text="Database Server Name Or IP" />
+        <Control Id="ServerNameEdit" Type="Edit" X="45" Y="43" Width="220" Height="18" Property="DB_SERVER" Text="{80}" />
+        <Control Id="DatabaseNameLabel" Type="Text" X="45" Y="63" Width="220" Height="15" TabSkip="no" Text="Database Name" />
+        <Control Id="DatabaseNameEdit" Type="Edit" X="45" Y="75" Width="220" Height="18" Property="DB_DATABASE" Text="{80}" />
+        <Control Id="UserLabel" Type="Text" X="45" Y="95" Width="100" Height="15" TabSkip="no" Text="&amp;Database Login Username" />
+        <Control Id="UserEdit" Type="Edit" X="45" Y="107" Width="220" Height="18" Property="DB_USER" Text="{80}" />
+        <Control Id="PasswordLabel" Type="Text" X="45" Y="127" Width="220" Height="15" TabSkip="no" Text="&amp;Database Login Password" />
+        <Control Id="PasswordEdit" Type="Edit" X="45" Y="139" Width="220" Height="18" Property="DB_PASSWORD" Text="{80}" Password="yes" />
+        <Control Id="EncryptionKeyLabel" Type="Text" X="45" Y="159" Width="220" Height="15" TabSkip="no" Text="&amp;Encryption Key" />
+        <Control Id="EncryptionKeyEdit" Type="Edit" X="45" Y="171" Width="220" Height="18" Property="ENCRYPTION_KEY" Text="{80}" Password="yes" />
+        <Control Id="AllowedUsersLabel" Type="Text" X="45" Y="191" Width="220" Height="15" TabSkip="no" Text="Allowed users" />
+        <Control Id="AllowedUsersEdit" Type="Edit" X="45" Y="203" Width="220" Height="18" Property="ALLOWED_USERS" Text="{80}"/>
+        <Control Id="Back" Type="PushButton" X="130" Y="243" Width="56" Height="17" Text="Back"></Control>
+        <Control Id="Next" Type="PushButton" X="186" Y="243" Width="56" Height="17" Default="yes" Text="Next"></Control>
+        <Control Id="Cancel" Type="PushButton" X="254" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+        </Control>
+      </Dialog>
+    </UI>
+  </Fragment>
+</Wix>

@@ -1,0 +1,86 @@
+﻿@model FalconOrchestratorWeb.Models.ViewModels.WhitelistingViewModel
+
+@{
+    ViewBag.Title = "Whitelisting - Edit";
+}
+<div class="container box-shadow">
+ @using (Html.BeginForm("edit", "whitelisting", FormMethod.Post))
+ {
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.Hidden("WhitelistId", Model.WhitelistId)
+        @Html.Hidden("Creator", User.Identity.Name)
+
+        <span class="fa fa-2x fa-edit"></span>
+        <span class="header">Edit Whitelist Rule @Model.WhitelistId</span>
+        <hr />
+        @Html.ValidationSummary()
+        <p>
+            When editing a whitelist rule, only the reason field can be changed.  If you need to change the type or value, delete this rule
+            and create a new one.
+        </p>
+        <br />
+        <div class="well">
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Type, "Type:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.DropDownList("TypeId", null, String.Empty, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.TypeId)
+                    @Html.HiddenFor(x => x.TypeId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Value, "Value:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.TextBoxFor(model => model.Value, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Value)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Reason, "Reason:", new { @class = "control-label col-2" })
+                <div class="col-10">
+                    @Html.TextAreaFor(x => Model.Reason, new { @rows = "8", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Reason)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-align">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+ }   
+</div>
+
+@section scripts{
+}
+
+
+@section styles{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

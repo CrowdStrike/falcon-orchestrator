@@ -1,0 +1,13 @@
+﻿.has-error .inp-validation-icon {
+  display: table-cell;
+  position: absolute;
+  vertical-align: middle middle;
+  right: 0px;
+  top: 0px;
+  width: 20px;
+  height: 1.4em;
+  padding: 0.4em 0px;
+  margin: 0px 4px;
+  font-size: 1.4em;
+  z-index: 100;
+}

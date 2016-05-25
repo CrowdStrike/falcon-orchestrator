@@ -1,0 +1,1 @@
+﻿Get-ItemProperty -Path {{FilePath}}

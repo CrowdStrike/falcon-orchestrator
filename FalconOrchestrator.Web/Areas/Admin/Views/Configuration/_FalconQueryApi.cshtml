@@ -1,0 +1,49 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.FalconQueryAPIConfigViewModel
+@using (Ajax.BeginForm("FalconQueryAPISettings", "Configuration", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-query" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="result-query" class="row col-12">
+    </div>
+    <div class="row col-12">
+        <h3>Falcon Query API Account</h3>
+        <br />
+        <p>
+            Provide URL and credentials for your Falcon Host Query API account.  This enables functionality to manage indicators stored in the platform for automated detections.
+        <p />
+        <br />
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-globe"></i> URL</span>
+                @Html.TextBoxFor(model => model.Url, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i> Username</span>
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i> Password</span>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row col-8" style="margin-top:10px;">
+        <div class="form-group">
+            <div class="col-md-offset-6">
+                <button type="submit" class="btn btn-default btn-success">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+}

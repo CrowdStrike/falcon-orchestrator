@@ -1,0 +1,150 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.EmailConfigViewModel
+@using (Ajax.BeginForm("EmailSettings", "Configuration", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-email" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="result-email" class="row col-12">
+    </div>
+    <div class="row col-12">
+        <h3>Email Configuration</h3>
+        <br />
+        <p>
+            The below settings are required to integrate with you exchange environment and allow for
+            automatic email notifications used by various components of the application.
+        </p>
+        <br />
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-server"></i> Server</span>
+                @Html.TextBoxFor(model => model.Server, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-cog"></i> Port</span>
+                @Html.TextBoxFor(model => model.Port, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i> Username</span>
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i> Password</span>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control"})
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user-secret"></i> SSL</span>
+                @Html.CheckBoxFor(model => model.SSL, new { @class = "form-checkbox" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-12">
+        <h3>Ticketing</h3>
+        <br />
+        <p>
+            These settings are used for any email notifications part of the ticketing module.
+        </p>
+        <br />
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-font"></i> Subject</span>
+                @Html.TextBoxFor(model => model.TicketSubject, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-folder-open"></i> Template</span>
+                @Html.TextBoxFor(model => model.TicketTemplatePath, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-12">
+        <h3>Alerts</h3>
+        <br />
+        <p>
+            These settings are used for any email notifications part of the Detections module.
+            Under ETL Rules configuration you must enabled Notification and set a notification severity
+            threshold.
+        </p>
+        <br />
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-font"></i> Subject</span>
+                @Html.TextBoxFor(model => model.AlertSubject, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-folder-open"></i> Template</span>
+                @Html.TextBoxFor(model => model.AlertTemplatePath, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-12">
+        <h3>Notification Contacts</h3>
+        <br />
+        <p>
+            The team email address supplied below will be CC'd on all email notifications including new detection events,
+            remediations tickets and SLA breach escalations.  The escalation email address will receive a report daily of any non-compliance
+            detections.  In both fields you can supply multiple email addresses or distribution lists by delimiting addresses with a semi-colon.
+            The sender email adressed is what will be used by the system for all notifications.
+        </p>
+        <br />
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i> Sender</span>
+                @Html.TextBoxFor(model => model.SenderAddress, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i> Team</span>
+                @Html.TextBoxFor(model => model.TeamAddress, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-globe"></i> Home URL</span>
+                @Html.TextBoxFor(model => model.HomeURL, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-8" style="margin-top:10px;">
+        <div class="form-group">
+            <div class="col-md-offset-6">
+                <button type="submit" class="btn btn-default btn-success">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+}

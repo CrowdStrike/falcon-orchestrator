@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Falcon Orchestrator" Language="1033" Version="1.0.0.0" 
+           Manufacturer="CrowdStrike" UpgradeCode="9279b740-8419-45c4-9538-6a45f8e949c7">
+    
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <Media Id="1" Cabinet="FalconOrchestrator.cab" EmbedCab="yes" />
+    <Icon Id="icon.ico" SourceFile="icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+    <Property Id="DB_USER" Value="username"/>
+    <Property Id="DB_PASSWORD" Value="password"/>
+    <Property Id="DB_SERVER" Value="localhost"/>
+    <Property Id="DB_DATABASE" Value="FalconOrchestrator"/>
+    <Property Id="ENCRYPTION_KEY" Value="secret"/>
+    <Property Id="ALLOWED_USERS" Value="domain\username, domain\username2"/>
+    
+    <Feature Id="ProductFeature" Title="FalconOrchestrator.Installer" Level="1">
+      <ComponentGroupRef Id="MyWebComponents" />
+      <ComponentGroupRef Id="ServiceConfiguration" />
+      <ComponentGroupRef Id="IISConfiguration" />
+      <ComponentGroupRef Id="SQLConfiguration" />
+    </Feature>
+    <UIRef Id="FalconOrchestratorSetupUI"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INETPUB"/>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="INETPUB" Name="Inetpub">
+        <Directory Id="INSTALLFOLDER" Name="Falcon Orchestrator">
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="SERVICEFOLDER" Name="Falcon Orchestrator">
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+</Wix>

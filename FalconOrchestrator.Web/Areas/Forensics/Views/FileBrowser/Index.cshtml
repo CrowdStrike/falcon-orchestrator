@@ -1,0 +1,59 @@
+﻿@model FalconOrchestratorWeb.Areas.Forensics.Models.FileBrowserViewModel
+@using (Ajax.BeginForm("Invoke", "FileBrowser", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "dir-list" }))
+{
+<div class="container">
+    <h1>File System Browser</h1>
+    <br />
+    <p>
+        Provide a computer name and the initial directory path to begin traversing the target host's file system.
+        Selecting directories will populate the directory input box where you can drill down further.
+        When selecting files, an option will appear to retrieve the remote file and prompt you to download it through your browser.
+    </p>
+    <div class="row" id="responseMessages"></div>
+    <hr />
+    <div class="well">
+        <div class="form">
+            <div class="form-group">
+                @Html.Label("Computer", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.ComputerName, new { @class = "form-control", @id = "targetComputerName" })
+                @Html.ValidationMessageFor(x => x.ComputerName)
+            </div>
+            <div class="form-group">
+                @Html.Label("Directory", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Directory, new { @class = "form-control", @id = "targetDirPath" })
+                @Html.ValidationMessageFor(x => x.Directory)
+            </div>
+            <div class="form-group">
+                   <button type="submit" class="btn btn-default btn-success" id="list-dir">
+                        <i class="fa fa-search"></i> Search
+                   </button>
+                <span id="get-file">
+
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div id="dir-list">
+    </div>
+</div>
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+<script>
+    $(document).ready(function () {
+        $('#listDir').click(function () {
+            if ($('#retrieve-file').length != 0) {
+                $('#retrieve-file').detach();
+            }
+        });
+    });
+</script>
+
+
+@section styles{
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />
+}

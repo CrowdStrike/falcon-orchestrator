@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build"
+       xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <WebSiteSource>..\FalconOrchestrator\</WebSiteSource>
+    <SetupF>..\Setup\</SetupF>
+    <PublishF>publish\</PublishF>
+    <Publish>$(SetupF)$(PublishF)</Publish>
+    <WebSiteContentCode>WebSiteContent.wxs</WebSiteContentCode>
+    <WebSiteContentObject>WebSiteContent.wixobj</WebSiteContentObject>
+    <MsiOut>bin\Release\FalconOrchestratorSetup.msi</MsiOut>
+    <DefineConstants>var.publishDir=$(Publish)</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <WebSiteContent Include="$(WebSiteContentCode)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WixCode Include="Product.wxs" />
+    <WixCode Include="$(WebSiteContentCode)" />
+    <WixCode Include="FalconOrchestratorSetupUI.wxs"/>
+    <WixCode Include="DatabaseSetupUI.wxs"/>
+    <WixCode Include="IISConfiguration.wxs"/>
+    <WixCode Include="Database.wxs" />
+    <WixCode Include="ServiceConfiguration.wxs" />
+  </ItemGroup>
+  
+  <Target Name="Build">
+    <MSBuild
+        Projects="..\FalconOrchestrator.sln"
+        Targets="ReBuild"
+        Properties="Configuration=Release" />
+  </Target>
+  
+  <Target Name="PublishWebsite">
+    <Message Text="Removing publish directory: $(SetupF)"/>
+    <RemoveDir Directories="$(SetupF)" ContinueOnError="false" />
+    <Message Text="Start to publish website" Importance="high" />
+    <MSBuild
+        Projects="..\\FalconOrchestrator.Web\FalconOrchestrator.Web.csproj"
+        Targets="ResolveReferences;_CopyWebApplication"
+        Properties="OutDir=$(Publish)bin\;WebProjectOutputDir=
+                        $(Publish);Configuration=Release" />
+  </Target>
+  
+<Target Name="Harvest">
+    <Exec
+        Command='"$(WIX)bin\heat" dir $(Publish) -dr INSTALLFOLDER -ke -srd -cg MyWebComponents -var var.publishDir -gg -out $(WebSiteContentCode)'
+        ContinueOnError="false"
+        WorkingDirectory="." />
+ </Target>
+  
+<Target Name="WIX">
+  <Exec
+      Command='"$(WIX)bin\candle" -ext WixIISExtension -ext WixSqlExtension -ext WixUtilExtension -dpublishDir=$(Publish) -dMyWebResourceDir=. @(WixCode, &apos; &apos;)'
+      ContinueOnError="false"
+      WorkingDirectory="." />
+
+  <Exec
+      Command='"$(WIX)bin\light" -ext WixIISExtension -ext WixUIExtension -ext WixSqlExtension -ext WixUtilExtension -out $(MsiOut) @(WixObject, &apos; &apos;)'
+      ContinueOnError="false"
+      WorkingDirectory="." />
+    <Message Text="Install package has been created." />
+</Target>
+
+  <Target Name="DeleteTmpFiles">
+    <RemoveDir Directories="$(Publish)" ContinueOnError="false" />
+    <RemoveDir Directories="$(SetupF)" ContinueOnError="false" />
+    <Delete Files="@(WixObject);@(WebSiteContent)" />
+  </Target>
+  
+  <ItemGroup>
+    <WixObject Include="Product.wixobj" />
+    <WixObject Include="$(WebSiteContentObject)" />
+    <WixObject Include="FalconOrchestratorSetupUI.wixobj" />
+    <WixObject Include="DatabaseSetupUI.wixobj" />
+    <WixObject Include="IISConfiguration.wixobj" />
+    <WixObject Include="ServiceConfiguration.wixobj" />
+    <WixObject Include="Database.wixobj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<FalconOrchestratorWeb.Models.ViewModels.TicketViewModel>
+
+@{
+    ViewBag.Title = "Ticketing";
+}
+<div class="container-fluid">
+    <h1>Ticketing</h1>
+    <br />
+    <p>
+        The ticketing module allows you to keep track of detections which resulted in some additional action, typically this is a request
+        to a service desk for remediation of system.  Or perhaps to another security team to perform a subsequent investigation.
+    </p>
+    <br/>
+    <p>
+        <a class="btn btn-default btn-success" href="/ticketing/create"><i class="fa fa-edit"></i> Create</a>
+    </p>
+    <hr />
+        <table id="datatable" class="table table-striped table-bordered table-hover dt-responsive">
+            <thead>
+                <tr>
+                    <th class="center-align">
+                        Ticket ID
+                    </th>
+                    <th>
+                        Dispatch Date
+                    </th>
+                    <th>
+                        Creator
+                    </th>
+                    <th>
+                        Hostname
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th class="center-align">
+                        Status
+                    </th>
+                    <th class="center-align">
+                        Days Open
+                    </th>
+                    <th class="center-align">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="center-align">
+                            @Html.DisplayFor(x => item.TicketId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.DispatchDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Creator)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Asset.HostnameDisplay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Asset.AccountName)
+                        </td>
+                        <td class="center-align">
+                            @Html.DisplayFor(x => item.Status)
+                        </td>
+                        <td class="center-align">
+                            @Html.DisplayFor(x => item.DaysOpen)
+                        </td>
+                        <td class="center-align">
+                            <a class="btn btn-default btn-success btn-sm" href="/ticketing/edit/@item.TicketId"><i class="fa fa-edit"></i> Edit</a>
+                            @Ajax.FormattedActionLink(string.Format("<i class='fa fa-trash-o'></i> Delete"), "delete", "ticketing", new { id = @item.TicketId }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "refresh" }, new { @class = "btn btn-default btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#datatable').dataTable({
+                "order": [[0, "desc"]],
+                "pagingType": "simple_numbers"
+            });
+        });
+        function refresh() {
+            location.reload();
+        };
+    </script>
+}
+
+@section styles{
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

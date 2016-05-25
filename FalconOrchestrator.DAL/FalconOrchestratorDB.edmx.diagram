@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="94858bac81ea4c7abcbb8633ba3d4ac0" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="FalconOrchestratorModel.AccountGroup" Width="1.5" PointX="11.625" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Account" Width="1.5" PointX="3.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.AccountTicket" Width="1.5" PointX="11.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.AuthenticationLog" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Configuration" Width="1.5" PointX="1.375" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.CustomerIOCEvent" Width="1.5" PointX="3.125" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Customer" Width="1.5" PointX="0.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DetectionDevice" Width="1.5" PointX="3.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Detection" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DetectionTag" Width="1.5" PointX="8.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DetectionTaxonomy" Width="1.5" PointX="11.25" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DetectionTicket" Width="1.5" PointX="11.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Device" Width="1.5" PointX="1.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DeviceTicket" Width="1.5" PointX="14.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DnsRequest" Width="1.5" PointX="8.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.DocumentsAccess" Width="1.5" PointX="8.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.ExecutablesWritten" Width="1.5" PointX="8.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Group" Width="1.5" PointX="9.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.NetworkAccess" Width="1.5" PointX="8.25" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Responder" Width="1.5" PointX="3.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.ResponderSchedule" Width="1.5" PointX="6" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.ScanResult" Width="1.5" PointX="8.25" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Severity" Width="1.5" PointX="3.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Status" Width="1.5" PointX="3.75" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Tag" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Taxonomy" Width="1.5" PointX="9" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.TaxonomyType" Width="1.5" PointX="6.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.TicketRecipient" Width="1.5" PointX="6.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Ticket" Width="1.5" PointX="9" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.UserActivityLog" Width="1.5" PointX="3" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.Whitelist" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.WhitelistType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_AccountAccountGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_GroupsAccountGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_AccountAccountTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_AccountEvents" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TicketAccountTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_CustomerAuthenticationLogs" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_CustomerCustomerIOCEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionDeviceCustomerIOCEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_CustomerDetection" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_CustomerDetectStatusLogs" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionDeviceDetection" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DeviceDetectionDevice" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionDetectionTaxonomies" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionDnsRequests" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionDocumentsAccessed" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionEventTags" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionExecutablesWritten" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionNetworkAccesses" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionScanResults" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DetectionTicketEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_ResponderDetection" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_SeverityDetection" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_StatusDetection" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TagEventTags" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TaxonomyDetectionTaxonomies" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TicketDetectionTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_DeviceDeviceTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TicketDeviceTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_ResponderResponderSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_SeverityTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TaxonomyTypesTaxonomy" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_TicketRecipientTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="FalconOrchestratorModel.FK_WhitelistTypeWhitelist" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FalconOrchestratorModel.v_DetectionAverages" Width="1.5" PointX="3.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

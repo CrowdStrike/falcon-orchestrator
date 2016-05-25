@@ -1,0 +1,334 @@
+﻿@model FalconOrchestratorWeb.Models.ViewModels.TicketViewModel
+@{
+    ViewBag.Title = "Ticketing - Edit";
+}
+
+
+<div class="container box-shadow">
+    @using (Html.BeginForm("edit", "ticketing", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+        @Html.AntiForgeryToken()
+        @Html.Hidden("Creator", User.Identity.Name)
+        @Html.HiddenFor(x => x.TicketId)
+        @Html.HiddenFor(x => x.DetectionId)
+
+        <div class="row r-padding">
+            <h3 class="detect-heading"><span class="fa fa-user"></span> Asset</h3>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Hostname</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.Asset.Hostname, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Asset.Hostname)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Domain</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.Asset.Domain, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">First Name</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.Asset.FirstName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Last Name</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.Asset.LastName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Account</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.AccountName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Asset.AccountName)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Department</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.Department, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Job Title</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.JobTitle, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Email Address</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.EmailAddress, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Manager</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.Manager, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Country</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.Country, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Phone Number</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.PhoneNumber, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">City</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.City, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">State/Province</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.StateProvince, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Street Address</label>
+                        </div>
+                        <div class="col-9 word-wrap">
+                            @Html.TextBoxFor(x => x.Asset.StreetAddress, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row r-padding">
+            <h3 class="detect-heading"><span class="fa fa-edit"></span> Ticket
+            </h3>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Assignee</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.DropDownListFor(x => x.TicketRecipientId, Model.RecipientList, String.Empty, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(x => x.TicketRecipientId)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Dispatch Date</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.DispatchDate, new {@class = "form-control", @id = "datetimepicker"})
+                            @Html.ValidationMessageFor(x => x.DispatchDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Priority</label>
+                        </div>
+                        <div class="col-9 ">
+                            @Html.DropDownListFor(x => x.SeverityId, Model.SeverityList, String.Empty, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(x => x.SeverityId)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Completion Date</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.CompletionDate, new {@class = "form-control", @id = "datetimepicker2"})
+                            @Html.ValidationMessageFor(x => x.CompletionDate)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Comment</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextAreaFor(x => x.Comment, new {@class = "form-control", @rows = "9"})
+                            @Html.ValidationMessageFor(x => x.Comment)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row p-bottom">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">External Ticket</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(x => x.ExternalTicket, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(x => x.ExternalTicket)
+                        </div>
+                    </div>
+                    <div class="row p-bottom">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Notification</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.CheckBoxFor(x => x.SendNotification, new {data_toggle = "toggle", data_size = "small", data_width = "150", data_on = "Yes", data_off = "No"})
+                        </div>
+                    </div>
+                    <div class="row p-bottom">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Notify User</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.CheckBoxFor(x => x.NotifyUser, new {data_toggle = "toggle", data_size = "small", data_width = "150", data_on = "Yes", data_off = "No"})
+                        </div>
+                    </div>
+                    <div class="row p-bottom">
+                        <div class="col-3">
+                            <label for="field" class="field-label-r">Notify Manager</label>
+                        </div>
+                        <div class="col-9">
+                            @Html.CheckBoxFor(x => x.NotifyManager, new {data_toggle = "toggle", data_size = "small", data_width = "150", data_on = "Yes", data_off = "No"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding-left: 11em">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    }
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-toggle.min.js")"></script>
+    <script>
+    $(document).ready(function () {
+        $(function () {
+            $('#datetimepicker').datetimepicker({
+                defaultDate: '@Model.DispatchDate',
+                format: "MMMM D, YYYY h:mm A ",
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down",
+                    next: "fa fa-arrow-right",
+                    previous: "fa fa-arrow-left"
+                }
+            });
+
+            $('#datetimepicker2').datetimepicker({
+                defaultDate: '@Model.CompletionDate',
+                format: "MMMM D, YYYY h:mm A ",
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down",
+                    next: "fa fa-arrow-right",
+                    previous: "fa fa-arrow-left"
+                }
+            });
+        });
+    });
+        $(function () {
+            $("span.field-validation-valid, span.field-validation-error").addClass('help-block');
+            $("div.col-6").has("span.field-validation-error").addClass('has-error');
+            $("div.validation-summary-errors").has("li:visible").addClass("alert alert-block alert-danger");
+        });
+    </script>
+}
+
+@section styles{
+    <link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/bootstrap-toggle.min.css")" rel="stylesheet" type="text/css" />
+}

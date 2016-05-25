@@ -1,0 +1,38 @@
+﻿@model FalconOrchestratorWeb.Areas.Forensics.Models.FileExtractionViewModel
+@using (Ajax.BeginForm("Invoke", "FileExtraction", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "download-link" }))
+{
+<div class="container">
+    <h1>File Extraction</h1>
+    <br />
+    <p>
+        Often times further analysis of a suspect file is required to gather relevant incident artifact and further your investigation.
+        This can be accomplished by simply providing the computer hostname or IP address and full path to the file you wish to retrieve.
+    </p>
+    <div class="row" id="errorMessages"></div>
+    <hr />
+    <div class="well">
+        <div class="form">
+            <div class="form-group">
+                @Html.Label("Computer", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.ComputerName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.ComputerName)
+            </div>
+            <div class="form-group">
+                @Html.Label("File Path", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.FilePath, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.FilePath)
+            </div>
+            <button type="submit" class="btn btn-default btn-success">
+                <i class="fa fa-arrow-circle-o-down"></i> Extract
+            </button>
+        </div>
+    </div>
+    <br />
+    <div id="download-link">
+    </div>
+</div>
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.bootstrap.js")"></script>

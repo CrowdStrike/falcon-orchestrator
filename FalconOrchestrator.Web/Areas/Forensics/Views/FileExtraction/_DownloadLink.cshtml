@@ -1,0 +1,55 @@
+﻿@model FalconOrchestrator.Forensics.FileMetadata
+    <section class="panel panel-default">
+        <header class="panel-heading">
+            <h3 class="panel-title">File Metadata</h3>
+        </header>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    File Name
+                </dt>
+                <dd>
+                    @Model.Name
+                </dd>
+                <dt>
+                    Full Path
+                </dt>
+                <dd>
+                    @Model.FullName
+                </dd>
+                <dt>
+                    Creation Time
+                </dt>
+                <dd>
+                    @Model.CreationTime
+                </dd>
+                <dt>
+                    Last Access Time
+                </dt>
+                <dd>
+                    @Model.LastAccessTime
+                </dd>
+                <dt>
+                    Last Write Time
+                </dt>
+                <dd>
+                    @Model.LastWriteTime
+                </dd>
+                <dt>
+                    Length (Bytes)
+                </dt>
+                <dd>
+                    @Model.Length
+                </dd>
+                <dt>
+                    Attributes
+                </dt>
+                <dd>
+                    @Model.Attributes
+                </dd>
+            </dl>
+        </div>
+    </section>
+    @Html.FormattedActionLink(String.Format("<i class=\"fa fa-download\"></i> Download"), "DownloadFile", "FileExtraction", new { fileName = @ViewBag.FileName }, new { @class = "btn btn-default btn-success" })
+
+

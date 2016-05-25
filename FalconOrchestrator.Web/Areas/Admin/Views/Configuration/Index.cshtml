@@ -1,0 +1,70 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.ConfigurationItemsViewModel
+
+@{
+    ViewBag.Title = "Configuration";
+}
+
+<body style="background:whitesmoke;">
+    <div class="well container box-shadow" style="background:white;">
+        <span class="fa fa-2x fa-edit"></span>
+        <span class="header">Configuration Settings</span>
+        <hr />
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#email"><i class="fa fa-envelope"></i> Email </a></li>
+            <li><a data-toggle="tab" href="#ldap"><i class="fa fa-database"></i> Active Directory</a></li>
+            <li><a data-toggle="tab" href="#falcon-forensics"><i class="fa fa-search"></i> Forensics</a></li>
+            <li><a data-toggle="tab" href="#falcon-streaming-api"><i class="fa fa-cloud"></i> Falcon Streaming API</a></li>
+            <li><a data-toggle="tab" href="#falcon-query-api"><i class="fa fa-cloud"></i> Falcon Query API</a></li>
+            <li><a data-toggle="tab" href="#etl-rules"><i class="fa fa-th-list"></i> Processing Rules</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="email" class="tab-pane fade in active">
+                @Html.Partial("_EmailSettings", Model.Email)
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="ldap" class="tab-pane fade">        
+                @Html.Partial("_LDAP", Model.LDAP)
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="falcon-forensics" class="tab-pane fade">            
+                @Html.Partial("_FalconForensics", Model.FalconForensics)
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="falcon-streaming-api" class="tab-pane fade">        
+                @Html.Partial("_FalconStreamingApi", Model.FalconStream)
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="falcon-query-api" class="tab-pane fade">            
+                @Html.Partial("_FalconQueryApi", Model.FalconQuery)
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="etl-rules" class="tab-pane fade">
+                @Html.Partial("_ETLRules", Model.ETLRules)
+            </div>
+        </div>
+    </div>
+</body>
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-datetimepicker.min.js")"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("ul.nav > li a").click(function () {
+            $("div.tab-pane").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+    </script>
+}
+@section styles
+{
+    <link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+}

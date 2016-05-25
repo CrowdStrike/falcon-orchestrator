@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+
+  <Fragment>
+    <DirectoryRef Id="INSTALLFOLDER">
+          <Component Id="FalconOrchestratorAppPool" Guid="{85957885-5345-40F6-8929-CB6FDB5072B7}" KeyPath="yes">
+        <iis:WebAppPool Id="FalconOrchestratorAppPool"
+                        Name="FalconOrchestrator"
+                        Identity="applicationPoolIdentity"
+                        ManagedPipelineMode="Integrated"
+                        ManagedRuntimeVersion="v4.0" />
+        <RemoveFolder Id="INSTALLFOLDER" On="uninstall"/>
+      </Component>
+      <Component Id="InstallWebsite" Guid="{0966710F-8CCE-4203-8E4A-329A6E7464EB}" KeyPath="yes">
+        <iis:WebSite Id="FalconOrchestrator" Description='FalconOrchestrator' Directory='INSTALLFOLDER' AutoStart='yes' StartOnInstall='yes'>
+          <iis:WebAddress Id="AllUnassigned" Port="80"/>
+          <iis:WebApplication Id="FalconOrchestratorApplication" Name="[FalconOrchestrator][WEBSITE_ID]" WebAppPool="FalconOrchestratorAppPool"></iis:WebApplication>
+          <iis:WebDirProperties Id="FalconOrchestrator_Properties" AnonymousAccess="yes" WindowsAuthentication="yes"/>
+        </iis:WebSite>
+      </Component>     
+      <Component Id="UpdateConnectionString" KeyPath="yes" Guid="{BFE3094B-AAE2-4898-8954-660A46379F95}">
+        <util:XmlFile Id="ModifyConnectionString" Action="setValue" ElementPath="/configuration/connectionStrings/add/@connectionString"
+        Value="metadata=res://*/FalconOrchestratorDB.csdl|res://*/FalconOrchestratorDB.ssdl|res://*/FalconOrchestratorDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=[DB_DATABASE];user id=[DB_USER];password=[DB_PASSWORD];MultipleActiveResultSets=True;App=EntityFramework&quot;"
+                      File="[INSTALLFOLDER]Web.config" Permanent="yes" SelectionLanguage="XPath"/>
+      </Component>
+      <Component Id="UpdateAllowedUsers" KeyPath="yes" Guid="{3380D2BE-B5AC-4DAA-BCC5-3884B26F8C07}">
+        <util:XmlFile Id="ModifyAllowedUsers" Action="setValue" ElementPath="/configuration/system.web/authorization/allow/@users"
+        Value="[ALLOWED_USERS]" File="[INSTALLFOLDER]Web.config" Permanent="yes" SelectionLanguage="XPath"/>
+      </Component>
+      <Component Id="UpdateCryptoKey" KeyPath="yes" Guid="{2D7F61A7-6F3F-480B-9CFC-64C7F3702726}">
+        <util:XmlFile Id="ModifyCryptoKey" Action="setValue" ElementPath="/configuration/appSettings/add[\[]@key='CryptoKey'[\]]/@value"
+        Value="[ENCRYPTION_KEY]" File="[INSTALLFOLDER]Web.config" Permanent="yes" SelectionLanguage="XPath"/>
+      </Component>
+    </DirectoryRef>
+    <ComponentGroup Id="IISConfiguration">
+      <ComponentRef Id="InstallWebsite" />
+      <ComponentRef Id="FalconOrchestratorAppPool" />
+      <ComponentRef Id="UpdateConnectionString" />
+      <ComponentRef Id="UpdateCryptoKey" />
+      <ComponentRef Id="UpdateAllowedUsers" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

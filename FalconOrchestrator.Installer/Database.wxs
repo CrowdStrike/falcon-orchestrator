@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+         xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+         xmlns:sql="http://schemas.microsoft.com/wix/SqlExtension">
+  <Fragment>
+    <Binary Id="CreateTablesBin" SourceFile="Database/CreateTables.sql"></Binary>
+    <Binary Id="PopulateTablesBin" SourceFile="Database/PopulateTables.sql"></Binary>
+    <Binary Id="FunctionsBin" SourceFile="Database/Functions.sql"></Binary>
+    <Binary Id="ViewsBin" SourceFile="Database/Views.sql"></Binary>
+    <util:User Id="SQLUser" Name="[DB_USER]" Password="[DB_PASSWORD]"></util:User>
+    <DirectoryRef Id="INSTALLFOLDER">
+          <Component Id="SqlComponent" Guid="{F2CC1993-F2AD-4757-8AE6-631EF3CBF33C}">
+        <sql:SqlDatabase Id="SqlDatabase" Database="[DB_DATABASE]" Server="[DB_SERVER]" CreateOnInstall="yes" DropOnUninstall="no" User="SQLUser" ContinueOnError="no">
+          <sql:SqlScript Id="CreateTables" ExecuteOnInstall="yes" ExecuteOnUninstall="no" BinaryKey="CreateTablesBin" ContinueOnError="no"/>
+          <sql:SqlScript Id="PopulateTables" ExecuteOnInstall="yes" ExecuteOnUninstall="no" BinaryKey="PopulateTablesBin" ContinueOnError="no" />
+          <sql:SqlScript Id="CreateFunctions" ExecuteOnInstall="yes" ExecuteOnUninstall="no" BinaryKey="FunctionsBin" ContinueOnError="no" />
+          <sql:SqlScript Id="CreateViews" ExecuteOnInstall="yes" ExecuteOnUninstall="no" BinaryKey="ViewsBin" ContinueOnError="no" />
+        </sql:SqlDatabase>
+        <CreateFolder/>
+      </Component>
+    </DirectoryRef> 
+    <ComponentGroup Id="SQLConfiguration">
+      <ComponentRef Id="SqlComponent" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

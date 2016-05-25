@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FalconOrchestrator.Forensics.InstalledSoftware>
+<table id="datatable" class="table table-bordered table-hover dt-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Application Name")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Version")
+            </th>
+            <th>
+                @Html.DisplayName("Publisher")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("InstalledDate")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Architecture")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => line.DisplayName)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(x => line.DisplayVersion)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.Publisher)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(x => line.InstallDate)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(x => line.Architecture)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+<script>
+        $(document).ready(function () {
+            $('#datatable').dataTable({
+                "order": [[0, "asc"]],
+                "pagingType": "simple_numbers"
+            })
+        });
+</script>
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />

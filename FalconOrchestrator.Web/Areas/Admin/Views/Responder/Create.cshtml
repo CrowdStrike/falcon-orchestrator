@@ -1,0 +1,67 @@
+﻿@model FalconOrchestratorWeb.Areas.Admin.Models.ResponderViewModel
+
+@{
+    ViewBag.Title = "Admin - Create Responder";
+}
+<div class="container box-shadow">
+    @using (Html.BeginForm("create", "responder", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <span class="fa fa-2x fa-edit"></span>
+            <span class="header">Create Responder</span>
+            <hr />
+            @Html.ValidationSummary()
+            <div class="well">
+                <div class="form-group">
+                    @Html.Label("First Name", new { @class = "control-label col-2" })
+                    <div class="col-6">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.FirstName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Last Name", new { @class = "control-label col-2" })
+                    <div class="col-6">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.LastName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Email Address", new { @class = "control-label col-2" })
+                    <div class="col-6">
+                        @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.EmailAddress)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Phone Number", new { @class = "control-label col-2" })
+                    <div class="col-6">
+                        @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.PhoneNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-align">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+
+}
+
+@section styles{
+}
