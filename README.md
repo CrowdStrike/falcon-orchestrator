@@ -3,6 +3,10 @@
 CrowdStrike Falcon Orchestrator is an extendable Windows-based application that provides workflow automation, case management and security response functionality.  The tool leverages the highly extensible APIs contained within the CrowdStrike Falcon Connect program.
 </p>
 
+For a brief overview of the project and demonstration of Falcon Orchestrator check out the following
+[video](https://www.youtube.com/watch?v=3Mi9L6na8G8) on YouTube.
+
+
 # Development
 
 Being a Windows based application, the tool was developed with the use of .NET 4.5, C#, ASP.NET MVC 4, Entity Framework and PowerShell.  If forking or cloning the repository, please note the code was written with Visual Studio 2015. Compatibility with earlier Visual Studio versions can be problematic.  You can either rebuild projects individually and copy over the compiled DLL/EXE to the requires location or alternatively re-complile the installer project to produce a new MSI package with you code changes.  To do this, open a visual studio command prompt, change directories to the **FalconOrchestrator.Installer** project and execute the command `msbuild /t:Build;PublishWebSite;Harvest;WIX setup.build`
