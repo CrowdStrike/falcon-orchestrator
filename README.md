@@ -1,6 +1,6 @@
 ![Logo](https://cloud.githubusercontent.com/assets/15896631/15528891/62e1f582-2216-11e6-85cd-b34ea9755c87.png)
 <p align="center">
-Falcon Orchestrator is a monolithic windows stack application that provides workflow automation, case management and security response functionality.  The tool leverages the highly extensible APIs contained within the Falcon Connect program.
+CrowdStrike Falcon Orchestrator is an extendable Windows-based application that provides workflow automation, case management and security response functionality.  The tool leverages the highly extensible APIs contained within the CrowdStrike Falcon Connect program.
 </p>
 
 # Development
