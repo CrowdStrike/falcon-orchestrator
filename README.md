@@ -11,13 +11,16 @@ Being a Windows based application, the tool was developed with the use of .NET 4
 
 The following external libraries are used within the project.  These are not provided via the GitHub repository, if building from source you will need to right click on the solution file in Visual Studio and select _Restore NuGet Packages_.
 
-* HighCharts - Javascript charting library
-* HighCharts.NET - .NET wrapper for HighCharts
+* HighCharts
+* HighCharts.NET
 * DotNetZip
 * JSON.NET
 * AutoMapper
 * Log4Net
 * WIX
+* JQuery
+* JQuery DataTables
+* Bootstrap
 
 
 # Project Structure
