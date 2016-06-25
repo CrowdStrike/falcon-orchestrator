@@ -16,34 +16,36 @@
 
 
 using System;
-using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
-using FalconOrchestratorWeb.Areas.Forensics.Models;
 using FalconOrchestrator.Forensics;
 using FalconOrchestratorWeb.Controllers;
+using System.Collections.Generic;
+using System.Net;
 
 namespace FalconOrchestratorWeb.Areas.Forensics.Controllers
 {
-    public class SoftwareManagementController : BaseController
+    public class MemoryController : BaseController
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        public ActionResult ListInstalled(AssetViewModel viewModel)
+        [HttpPost]
+        public ActionResult ProcessDump(string computerName, string pid)
         {
             try
             {
-                PSRemoting ps = new PSRemoting(viewModel.ComputerName, config.FALCON_FORENSICS_USERNAME, config.FALCON_FORENSICS_PASSWORD, config.FALCON_FORENSICS_DOMAIN);
-                SoftwareManagement softWare = new SoftwareManagement(ps);
-                string command = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/Scripts/Get-InstalledPrograms.ps1"));
-                List<InstalledSoftware> model = softWare.GetInstalledSoftware(command);
-                return PartialView("_InstalledSoftwareListing", model);
+                PSRemoting ps = new PSRemoting(computerName, config.FALCON_FORENSICS_USERNAME, config.FALCON_FORENSICS_PASSWORD, config.FALCON_FORENSICS_DOMAIN);
+                Memory memory = new Memory(ps);
+                string command = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/Scripts/Out-minidump.ps1"));
+                Dictionary<string, string> mapping = new Dictionary<string, string>();
+                mapping.Add("{{ProcessId}}", pid);
+                command = PSRemoting.CommandMapping(command, mapping);
+                memory.ProcessDump(command);
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return new EmptyResult();
             }
             catch (Exception e)
             {
-                return PartialView("_Error", e.Message);
+                throw new HttpException(500, e.Message);
             }
         }
 

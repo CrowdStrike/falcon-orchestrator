@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="FileSystemBrowser.cs" />
     <Compile Include="FileExtraction.cs" />
+    <Compile Include="Memory.cs" />
+    <Compile Include="ProcessManagement.cs" />
     <Compile Include="PSRemoting.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

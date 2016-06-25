@@ -15,29 +15,20 @@
 //    along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 
-using System.ComponentModel.DataAnnotations;
-
-namespace FalconOrchestratorWeb.Areas.Forensics.Models
+namespace FalconOrchestrator.Forensics
 {
-    public class FileExtractionViewModel
+    public class Memory
     {
-        [Required(ErrorMessage = "A hostname or IP address is required")]
-        public string ComputerName { get; set; }
-        [Required(ErrorMessage = "A file path is required")]
-        public string FilePath { get; set; }
-    }
+        private PSRemoting _psr;
 
-    public class FileBrowserViewModel
-    {
-        [Required(ErrorMessage = "A hostname or IP address is required")]
-        public string ComputerName { get; set; }
-        [Required(ErrorMessage = "A directory is required")]
-        public string Directory { get; set; }
-    }
+        public Memory(PSRemoting psr)
+        {
+            _psr = psr;
+        }
 
-    public class AssetViewModel
-    {
-        [Required(ErrorMessage = "A hostname or IP address is required")]
-        public string ComputerName { get; set; }
+        public void ProcessDump(string command)
+        {
+            _psr.ExecuteCommand(command);
+        }
     }
 }

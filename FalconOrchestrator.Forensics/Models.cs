@@ -16,6 +16,8 @@
 
 
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace FalconOrchestrator.Forensics
 {
@@ -37,5 +39,31 @@ namespace FalconOrchestrator.Forensics
         public string Architecture { get; set; }
         public string UninstallKey { get; set; }
         public string Guid { get; set; }
+    }
+
+    public class Process
+    {
+        public int Id { get; set; }
+        public uint ParentProcessId { get; set; }
+        public string Name { get; set; }
+        public string Company { get; set; }
+        public string Owner { get; set; }
+        public string Path { get; set; }
+        public string ProductVersion { get; set; }
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public string CommandLine { get; set; }
+        public double CPU { get; set; }
+        public int HandleCount { get; set; }
+        public int PagedMemorySize { get; set; }
+        public int PagedSystemMemorySize { get; set; }
+        public int PrivateMemorySize { get; set; }
+        public int VirtualMemorySize { get; set; }
+        public int NonpagedSystemMemorySize { get; set; }
+        public int PeakPagedMemorySize { get; set; }
+        public int PeakWorkingSet { get; set; }
+        public int PeakVirtualMemorySize { get; set; }
+        public int WorkingSet { get; set; }
+
     }
 }

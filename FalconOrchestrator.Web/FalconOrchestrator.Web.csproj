@@ -151,6 +151,8 @@
     <Compile Include="Areas\Admin\Models\RecipientViewModel.cs" />
     <Compile Include="Areas\Forensics\Controllers\FileBrowserController.cs" />
     <Compile Include="Areas\Forensics\Controllers\FileExtractionController.cs" />
+    <Compile Include="Areas\Forensics\Controllers\MemoryController.cs" />
+    <Compile Include="Areas\Forensics\Controllers\ProcessesController.cs" />
     <Compile Include="Areas\Forensics\Controllers\SoftwareManagementController.cs" />
     <Compile Include="Areas\Forensics\ForensicsAreaRegistration.cs" />
     <Compile Include="Areas\Forensics\Models\ViewModels.cs" />
@@ -367,6 +369,10 @@
     <Content Include="Areas\Forensics\Views\SoftwareManagement\Index.cshtml" />
     <Content Include="Areas\Forensics\Views\SoftwareManagement\_InstalledSoftwareListing.cshtml" />
     <Content Include="App_Data\Scripts\Get-InstalledPrograms.ps1" />
+    <Content Include="Areas\Forensics\Views\Processes\Index.cshtml" />
+    <Content Include="Areas\Forensics\Views\Processes\_ProcessListing.cshtml" />
+    <Content Include="App_Data\Scripts\Get-ProcessListing.ps1" />
+    <Content Include="App_Data\Scripts\Out-Minidump.ps1" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

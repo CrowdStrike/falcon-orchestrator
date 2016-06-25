@@ -1,0 +1,28 @@
+﻿@model FalconOrchestratorWeb.Areas.Forensics.Models.AssetViewModel
+@using (Ajax.BeginForm("List", "Processes", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "process-list" }))
+{
+    <div class="container">
+        <h1>Process Listing</h1>
+        <br />
+        <p>
+            Query a system below to list and manage active processes. Exercise caution when terminating processes.  Killing critical operating system
+            processes can result in crashing the target system.
+        </p>
+        <hr />
+        <div id="responseMessages"></div>
+        <div class="well">
+            <div class="form">
+                <div class="form-group">
+                    @Html.Label("Computer", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.ComputerName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ComputerName)
+                </div>
+                <button type="submit" class="btn btn-default btn-success">
+                    <i class="fa fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row" id="process-list"></div>
+    </div>
+}

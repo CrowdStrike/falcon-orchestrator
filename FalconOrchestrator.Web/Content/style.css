@@ -4,6 +4,13 @@
 /*------------------------------------------------------------------
 [1. Global]
 */
+td.details-control {
+    background: url('../Content/DataTables-1.10.4/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.details td.details-control {
+    background: url('../Content/DataTables-1.10.4/images/details_close.png') no-repeat center center;
+}
 
 .panel-number{
     text-align:center;
@@ -114,6 +121,18 @@ input.form-checkbox
 div.form-align
 {
     padding-left:12em;
+}
+
+/*------------------------------------------------------------------
+[Forensics]
+*/
+.dl-processes dd {
+    white-space:normal;
+    margin-left: 220px;
+}
+
+.dl-processes dt {
+    width:205px;
 }
 
 /*------------------------------------------------------------------

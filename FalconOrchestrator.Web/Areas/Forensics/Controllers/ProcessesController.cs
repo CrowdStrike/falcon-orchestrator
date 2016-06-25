@@ -16,34 +16,57 @@
 
 
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Net;
 using FalconOrchestratorWeb.Areas.Forensics.Models;
 using FalconOrchestrator.Forensics;
 using FalconOrchestratorWeb.Controllers;
 
 namespace FalconOrchestratorWeb.Areas.Forensics.Controllers
 {
-    public class SoftwareManagementController : BaseController
+    public class ProcessesController : BaseController
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult ListInstalled(AssetViewModel viewModel)
+        public ActionResult List(AssetViewModel viewModel)
         {
             try
             {
                 PSRemoting ps = new PSRemoting(viewModel.ComputerName, config.FALCON_FORENSICS_USERNAME, config.FALCON_FORENSICS_PASSWORD, config.FALCON_FORENSICS_DOMAIN);
-                SoftwareManagement softWare = new SoftwareManagement(ps);
-                string command = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/Scripts/Get-InstalledPrograms.ps1"));
-                List<InstalledSoftware> model = softWare.GetInstalledSoftware(command);
-                return PartialView("_InstalledSoftwareListing", model);
+                ProcessManagement process = new ProcessManagement(ps);           
+                string command = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/Scripts/Get-ProcessListing.ps1"));
+                List<Process> model = process.ListProcesses(command);
+                ViewBag.ComputerName = viewModel.ComputerName;
+                return PartialView("_ProcessListing", model);
             }
             catch (Exception e)
             {
                 return PartialView("_Error", e.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Kill(string computerName, string pid)
+        {
+            try
+            {
+                PSRemoting ps = new PSRemoting(computerName, config.FALCON_FORENSICS_USERNAME, config.FALCON_FORENSICS_PASSWORD, config.FALCON_FORENSICS_DOMAIN);
+                ProcessManagement process = new ProcessManagement(ps);
+                process.Kill(Convert.ToInt32(pid));
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return new EmptyResult();
+
+            }
+            catch (Exception e)
+            {
+                //Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                //return Content(e.Message);
+                throw new HttpException(500, e.Message);
             }
         }
 
