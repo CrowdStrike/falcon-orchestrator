@@ -57,5 +57,26 @@ namespace FalconOrchestrator.Forensics
 
         }
 
+        public bool CheckFileExists(string path)
+        {
+            foreach (PSObject line in _psr.ExecuteCommand("Test-Path \"" + path + "\""))
+            {
+                return System.Convert.ToBoolean(line.ToString());
+            }
+            return false;
+        }
+
+        public void DeleteFile(string path)
+        {
+            _psr.ExecuteCommand("Remove-Item " + path + " -Recurse -Force");
+        }
+
+        public void CopyFile(string source, string destination)
+        {
+            _psr.ExecuteCommand("Copy-Item -Recurse -Force -Path \"" + source + "\" -Destination \"" + destination + "\"");
+        }
+
+
+
     }
 }

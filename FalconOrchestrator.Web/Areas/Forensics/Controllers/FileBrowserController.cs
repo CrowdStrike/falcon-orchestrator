@@ -15,6 +15,8 @@
 //    along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
+using System.Net;
+using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using FalconOrchestrator.Forensics;
@@ -38,11 +40,30 @@ namespace FalconOrchestratorWeb.Areas.Forensics.Controllers
                 PSRemoting ps = new PSRemoting(viewModel.ComputerName, config.FALCON_FORENSICS_USERNAME, config.FALCON_FORENSICS_PASSWORD, config.FALCON_FORENSICS_DOMAIN);
                 FileSystemBrowser browser = new FileSystemBrowser(ps);
                 List<FileMetadata> model = browser.GetDirectoryContent(@"'" + viewModel.Directory + "'");
+                @ViewBag.ComputerName = viewModel.ComputerName;
                 return PartialView("_DirectoryListing", model);
             }
             catch (Exception e)
             {
                 return PartialView("_Error", e.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string computerName, string filePath)
+        {
+            try
+            {
+                string file = System.Text.RegularExpressions.Regex.Replace(filePath, "[|]", "`$1");
+                PSRemoting ps = new PSRemoting(computerName, config.FALCON_FORENSICS_USERNAME, config.FALCON_FORENSICS_PASSWORD, config.FALCON_FORENSICS_DOMAIN);
+                FileSystemBrowser browser = new FileSystemBrowser(ps);
+                browser.DeleteFile(file);
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return new EmptyResult();
+            }
+            catch (Exception e)
+            {
+                throw new HttpException(500, e.Message);
             }
         }
     }
