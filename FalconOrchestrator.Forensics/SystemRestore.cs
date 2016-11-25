@@ -126,7 +126,6 @@ namespace FalconOrchestrator.Forensics
             return copies;
         }
 
-
         public void MountShadowCopyVolume(string volume, string path = @"C:\shadow")
         {
             FileSystemBrowser filesys = new FileSystemBrowser(_psr);
