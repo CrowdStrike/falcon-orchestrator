@@ -1,0 +1,137 @@
+﻿@model IEnumerable<FalconOrchestrator.Forensics.FileMetadata>
+<hr />
+<h1>Shadow Copy Storage</h1>
+<br />
+<p>
+    The shadow copy has now been mounted to the root of the primary file system in a directory titled shadow.  You can browse the files and select those you want to recover.
+    This will copy the file back to the main file system where it was originally stored when the restore point was created.  If a file already exists with that name, it will be overwritten. 
+    You can recover individual files or entire directories. To navigate the filesystem simply double click on a row within the table.
+</p>
+<br />
+<p>
+    These files are based off the shadow copy located at <b>@ViewBag.DeviceObject.Replace("\\\\", "\\")</b>
+</p>
+<p>
+    Current active directory <b>@ViewBag.Path</b>
+</p>
+<br />
+<div id="recoveryMessages"></div>
+<br />
+<table id="datatable2" class="table table-hover table-bordered dt-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("Extension")
+            </th>
+            <th>
+                @Html.DisplayName("Length (Bytes)")
+            </th>
+            <th>
+                @Html.DisplayName("Attributes")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Creation Time")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Last Access Time")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Last Modification Time")
+            </th>
+            <th>
+                @Html.DisplayName("Full Path")
+            </th>
+            <th>
+                @Html.DisplayName("Action")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr id="@item.FullName.Replace(" ","-").Replace("\\","-").Replace("(","-").Replace(")","-")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attributes)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(modelItem => item.CreationTime)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(modelItem => item.LastAccessTime)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(modelItem => item.LastWriteTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td class="center-align">
+                    @Ajax.FormattedActionLink(string.Format("<i class='fa fa-copy'></i> Recover"), "RecoverFile", "SystemRestore", new { computerName = @ViewBag.ComputerName, source = @item.FullName, attributes = @item.Attributes }, new AjaxOptions { HttpMethod = "GET", OnFailure = "recoveryFailure", OnSuccess = "recoverySuccess" }, new { @class = "btn btn-default btn-success btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+<script>
+
+    function recoverySuccess(data) {
+        $('#recoveryMessages').append(data);
+    }
+
+    function recoveryFailure(data) {
+        $('#recoveryMessages').append(data.responseText);
+    }
+
+    $(document).ready(function () {
+        var $table = $('#datatable2').DataTable({
+            "order": [[0, "asc"]],
+            "pagingType": "simple_numbers",
+            "columnDefs": [{ "className": "hidden", "targets": [7, 1, 2] }]
+        });
+
+        var $computerName = $('#targetComputerName').val();
+
+        $('#datatable2 tbody').on('dblclick', 'tr', function () {
+            var $attributes = $(this).find('td:eq(3)').text();
+            var $deviceObject = '@ViewBag.DeviceObject';
+
+            if ($attributes.indexOf("Directory") >= 0)
+            {
+                $(this).addClass('active');
+                var $path = $(this).find('td:eq(7)').text();
+                $.ajax({
+                    url: '@Url.Content("~/SystemRestore/BrowserRefresh")',
+                    data: {
+                        'computerName': $computerName,
+                        'path': $.trim($path),
+                        'deviceObject': $deviceObject
+                    },
+                    success: function (result) {
+                        $('#shadow-storage').html(result);
+                    },
+                    error: function(result)
+                    {
+                        $('#recoveryMessages').html(result.responseText);
+                    }
+                })
+           }
+        });
+    });
+</script>
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />

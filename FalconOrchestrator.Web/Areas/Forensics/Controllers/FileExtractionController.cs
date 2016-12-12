@@ -41,7 +41,7 @@ namespace FalconOrchestratorWeb.Areas.Forensics.Controllers
         {
             if (file != null && file.ContentLength > 0)
             {
-                 CompressAndEncrypt(file);
+                CompressAndEncrypt(file);
             }
             return new EmptyResult();
         }

@@ -31,7 +31,7 @@ namespace FalconOrchestratorWeb.Areas.Forensics.Controllers
             return View();
         }
 
-        public ActionResult ListInstalled(SoftwareInventoryViewModel viewModel)
+        public ActionResult ListInstalled(AssetViewModel viewModel)
         {
             try
             {

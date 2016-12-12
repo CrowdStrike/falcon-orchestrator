@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FalconOrchestrator.Forensics.SystemRestorePoint>
+@Html.Partial("_RestoreModal")
+@Html.Partial("_RecoverModal")
+<table id="datatable" class="table table-bordered table-hover dt-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Creation Time (UTC)")
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Sequence Number")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Event Type")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Restore Point Type")
+            </th>`
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model)
+            {
+            <tr>
+                <td>
+                    @line.CreationTimeDateTime
+                </td>
+                <td>
+                    @line.Description
+                </td>
+                <td class="center-align">
+                    @line.SequenceNumber
+                </td>
+                <td class="center-align">
+                    @line.EventType
+                </td>
+                <td class="center-align">
+                    @line.RestorePointType
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#execute-restore').on("click", "#run-restore", function () {
+            $('#restoreModal').modal('show');
+        });
+
+        $('#recover-data').on("click", "#run-recovery", function () {
+            $('#recoverModal').modal('show');
+        });
+
+        var $table = $('#datatable').dataTable({
+            "order": [[0, "dsc"]],
+            "pagingType": "simple_numbers",
+        });
+
+        $('#datatable tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $('#run-restore').detach();
+                $('#run-recovery').detach();
+            }
+            else {
+                $table.$('tr.active').removeClass('active');
+                $(this).addClass('active');
+                if ($('#run-restore').length == 0) {
+                    $('#execute-restore').append("<a href=\"#\" id=\"run-restore\" class=\"btn btn-primary btn-success\"><i class=\"fa fa-refresh\"></i> Restore</a>");
+                }
+                if ($('#run-recovery').length == 0) {
+                    $('#recover-data').append("<a href=\"#\" id=\"run-recovery\" class=\"btn btn-primary btn-success\"><i class=\"fa fa-database\"></i> Recover</a>");
+                }
+            }
+        });
+    });
+
+</script>
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />

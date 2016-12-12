@@ -33,6 +33,12 @@ namespace FalconOrchestratorWeb.Areas.Forensics
                 );
 
             context.MapRoute(
+              "SystemRestore",
+              "forensics/system-restore/{action}/{id}",
+              new { Controller = "SystemRestore", action = "Index", id = UrlParameter.Optional }
+              );
+
+            context.MapRoute(
                 "forensics_default",
                 "forensics/{controller}/{action}/{id}",
                 new { Controller = "forensics", action = "index", id = UrlParameter.Optional }

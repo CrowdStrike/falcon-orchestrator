@@ -29,6 +29,7 @@ namespace FalconOrchestratorWeb.Models.ViewModels
 
         [Required(ErrorMessage = "A ticket recipient must be selected")]
         public int TicketRecipientId { get; set; }
+        public string Assignee { get; set; }
 
         [Required]
         public string Creator { get; set; }

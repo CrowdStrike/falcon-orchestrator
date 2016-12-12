@@ -66,17 +66,4 @@ namespace FalconOrchestrator.Forensics
             return result;
         }
     }
-
-    public class FileMetadata
-    {
-        public string CreationTime { get; set; }
-        public string LastAccessTime { get; set; }
-        public string LastWriteTime { get; set; }
-        public string Attributes { get; set; }
-        public string DirectoryName { get; set; }
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        public string Extension { get; set; }
-        public string Length { get; set; }
-    }
 }

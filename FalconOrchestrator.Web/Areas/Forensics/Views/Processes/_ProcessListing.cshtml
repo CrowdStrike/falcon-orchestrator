@@ -1,0 +1,366 @@
+﻿@model IEnumerable<FalconOrchestrator.Forensics.Process>
+<table id="datatable" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="details-control">
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("PID")
+            </th>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("PPID")
+            </th>
+            <th>
+                @Html.DisplayName("Path")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Owner")
+            </th>
+            <th>
+                @Html.DisplayName("Company")
+            </th>
+            <th class="center-align">
+                @Html.DisplayName("Action")
+            </th>
+            <th>
+                @Html.DisplayName("Start Time")
+            </th>
+            <th>
+                @Html.DisplayName("Command Line")
+            </th>
+            <th>
+                @Html.DisplayName("Product Version")
+            </th>
+            <th>
+                @Html.DisplayName("CPU")
+            </th>
+            <th>
+                @Html.DisplayName("Handle Count")
+            </th>
+            <th>
+                @Html.DisplayName("Working Set")
+            </th>
+            <th>
+                @Html.DisplayName("Paged Memory Size")
+            </th>
+            <th>
+                @Html.DisplayName("Private Memory Size")
+            </th>
+            <th>
+                @Html.DisplayName("Virtual Memory Size")
+            </th>
+            <th>
+                @Html.DisplayName("Nonpaged System Memory Size")
+            </th>
+            <th>
+                @Html.DisplayName("Paged System Memory Size")
+            </th>
+            <th>
+                @Html.DisplayName("Peak Paged Memory Size")
+            </th>
+            <th>
+                @Html.DisplayName("Peak Working Set")
+            </th>
+            <th>
+                @Html.DisplayName("Peak Virtual Memory Size")
+            </th>   
+            <th>
+                @Html.DisplayName("Description")
+            </th>         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model)
+            {
+            <tr id="@line.Id">
+                <td class="details-control">
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(x => line.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.Name)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(x => line.ParentProcessId)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.Path)
+                </td>
+                <td class="center-align">
+                    @Html.DisplayFor(x => line.Owner)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.Company)
+                </td>
+                <td class="center-align">
+                    @Ajax.FormattedActionLink(string.Format("<i class='fa fa-ban'></i> Stop"), "kill", "processes", new { pid = line.Id, computerName = @ViewBag.ComputerName }, new AjaxOptions { HttpMethod = "POST", OnSuccess="successfulProcKill(" + @line.Id + ")", OnFailure="failedProcKill(" + @line.Id + ")"}, new { @class = "btn btn-default btn-danger btn-sm" })
+                    @Ajax.FormattedActionLink(string.Format("<i class='fa fa-download'></i> Memory"), "processdump", "memory", new { pid = line.Id, computerName = @ViewBag.ComputerName }, new AjaxOptions { HttpMethod = "POST", OnSuccess="successfulMemoryCapture('" + @line.Id + "','" + @ViewBag.ComputerName + "')", OnFailure= "failedMemoryCapture(" + @line.Id + ")" }, new { @class = "btn btn-default btn-primary btn-sm" })
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.CommandLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.ProductVersion)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.CPU)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.HandleCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.WorkingSet)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.PagedMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.PrivateMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.VirtualMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.NonpagedSystemMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.PagedSystemMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.PeakPagedMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.PeakWorkingSet)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.PeakVirtualMemorySize)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => line.Description)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/jquery.dataTables.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.10.4/dataTables.responsive.js")"></script>
+<script>
+
+    function successMsg(message)
+    {
+        return "<div class=\"alert alert-success\">" +
+                     "<a href=\"#\" class=\"close\" data-dismiss=\"alert\"><i class=\"fa fa-close\"></i></a>" +
+                     "<i class=\"fa fa-check-square-o\"></i> <b>Success!</b> " + message + "</div>";
+    }
+
+    function failureMsg(message)
+    {
+        return "<div class=\"alert alert-danger\">" +
+                     "<a href=\"#\" class=\"close\" data-dismiss=\"alert\"><i class=\"fa fa-close\"></i></a>" +
+                     "<i class=\"fa fa-exclamation-triangle\"></i> <b>Error!</b> " + message + "</div>";
+    }
+
+    function successfulMemoryCapture(id, computerName)
+    {
+        var msg = successMsg("Memory capture for process " + id + " has been initiated");
+        $('#responseMessages').append(msg);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+        var $filePath = 'C:\\' + id + '.dmp';
+        $.ajax({
+            url: '/forensics/file-extraction/invokefrombrowser?computerName=' + computerName + '&filePath=' + $filePath,
+            type: 'GET',
+            success: function () {
+                downloadFile(id + ".dmp");
+            }
+        });
+
+    }
+
+    function failedMemoryCapture(id)
+    {
+        var msg = failureMsg("Memory capture for process " + id + " has failed");
+        $('#responseMessages').append(msg);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+
+    function successfulProcKill(id)
+    {
+        var msg = successMsg("Process " + id + " has been terminated");
+        $('#responseMessages').append(msg);
+        var row = $('#' + id);
+        $('#datatable').dataTable().fnDeleteRow(row);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+
+    function failedProcKill(id)
+    {
+        var msg = failureMsg("Could not terminate process " + id);
+        $('#responseMessages').append(msg);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+
+    function downloadFile(filename) {
+        window.location = '/forensics/file-extraction/downloadfile?fileName=' + filename;
+    }
+
+    function format(d) {
+        return '<dl class="dl-horizontal dl-processes">' +
+               '<div class="row">' +
+               '<div class="col col-6">' +
+               '<dt> Start Time </dt>' +
+               '<dd>' + d.StartTime + '</dd>' +
+               '<dt> Command Line </dt>' +
+               '<dd>' + d.CommandLine + '</dd>' +
+               '<dt> Product Version </dt>' +
+               '<dd>' + d.ProductVersion + '</dd>' +
+               '<dt> Description </dt>' +
+               '<dd>' + d.Description + '</dd>' +
+               '<dt> CPU </dt>' +
+               '<dd>' + d.CPU + '</dd>' +
+               '<dt> Handle Count </dt>' +
+               '<dd>' + d.HandleCount + '</dd>' +
+               '<dt> Working Set </dt>' +
+               '<dd>' + d.WorkingSet + '</dd>' +
+               '</div>' +
+               '<div class="col col-6">' +
+                '<dt> Paged Memory Size </dt>' +
+               '<dd>' + d.PagedMemorySize + '</dd>' +
+               '<dt> Private Memory Size </dt>' +
+               '<dd>' + d.PrivateMemorySize + '</dd>' +
+               '<dt> Virtual Memory Size </dt>' +
+               '<dd>' + d.VirtualMemorySize + '</dd>' +
+               '<dt> Nonpaged System Memory Size </dt>' +
+               '<dd>' + d.NonpagedSystemMemorySize + '</dd>' +
+               '<dt> Paged System Memory Size </dt>' +
+               '<dd>' + d.PagedSystemMemorySize + '</dd>' +
+               '<dt> Peak Paged Memory Size </dt>' +
+               '<dd>' + d.PeakPagedMemorySize + '</dd>' +
+               '<dt> Peak Working Set </dt>' +
+               '<dd>' + d.PeakWorkingSet + '</dd>' +
+               '<dt> Peak Vritual Memory Size </dt>' +
+               '<dd>' + d.PeakVirtualMemorySize + '</dd>' +
+               '</div>' +
+               '</div>' +
+               '</dl>';
+    }
+
+    $(document).ready(function () {
+            var dt = $('#datatable')
+                .DataTable({
+                    "order": [[0, "asc"]],
+                    "pagingType": "simple_numbers",
+                    "columnDefs": [
+                        {
+                            "targets": [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [8],
+                            "data": "StartTime"
+                        },
+                        {
+                            "targets": [9],
+                            "data": "CommandLine"
+                        },
+                        {
+                            "targets": [10],
+                            "data": "ProductVersion"
+                        },
+                        {
+                            "targets": [11],
+                            "data": "CPU"
+                        },
+                        {
+                            "targets": [12],
+                            "data": "HandleCount"
+                        },
+                        {
+                            "targets": [13],
+                            "data": "WorkingSet"
+                        },
+                        {
+                            "targets": [14],
+                            "data": "PagedMemorySize"
+                        },
+                        {
+                            "targets": [15],
+                            "data": "PrivateMemorySize"
+                        },
+                        {
+                            "targets": [16],
+                            "data": "VirtualMemorySize"
+                        },
+                        {
+                            "targets": [17],
+                            "data": "NonpagedSystemMemorySize"
+                        },
+                        {
+                            "targets": [18],
+                            "data": "PagedSystemMemorySize"
+                        },
+                        {
+                            "targets": [19],
+                            "data": "PeakPagedMemorySize"
+                        },
+                        {
+                            "targets": [20],
+                            "data": "PeakWorkingSet"
+                        },
+                        {
+                            "targets": [21],
+                            "data": "PeakVirtualMemorySize"
+                        },
+                        {
+                            "targets": [22],
+                            "data": "Description"
+                        }
+                    ]
+                });
+
+            // Array to track the ids of the details displayed rows
+            var detailRows = [];
+
+            $('#datatable tbody').on('click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = dt.row( tr );
+                var idx = $.inArray( tr.attr('id'), detailRows );
+
+                if ( row.child.isShown() ) {
+                    tr.removeClass( 'details' );
+                    row.child.hide();
+
+                    // Remove from the 'open' array
+                    detailRows.splice( idx, 1 );
+                }
+                else {
+                    tr.addClass( 'details' );
+                    row.child( format( row.data() ) ).show();
+
+                    // Add to the 'open' array
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                }
+            } );
+
+            // On each draw, loop over the `detailRows` array and show any child rows
+            dt.on( 'draw', function () {
+                $.each( detailRows, function ( i, id ) {
+                    $('#'+id+' td.details-control').trigger( 'click' );
+                } );
+            });
+        });
+
+</script>
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/DataTables-1.10.4/css/dataTables.responsive.css")" rel="stylesheet" type="text/css" />

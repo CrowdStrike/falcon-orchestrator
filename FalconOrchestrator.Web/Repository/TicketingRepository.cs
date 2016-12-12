@@ -70,6 +70,7 @@ namespace FalconOrchestratorWeb.Repository
             foreach (Ticket line in tickets)
             {
                 TicketViewModel model = config.CreateMapper().Map<Ticket, TicketViewModel>(line);
+                model.Assignee = line.TicketRecipient.Title;
                 model.Asset = new Asset();
                 model.Asset.AccountName = line.AccountTickets.Select(x => x.Account.AccountName).Single();
                 model.Asset.Hostname = line.DeviceTickets.Select(x => x.Device.Hostname).Single();

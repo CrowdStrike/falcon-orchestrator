@@ -26,12 +26,15 @@
             <th>
                 @Html.DisplayName("Full Path")
             </th>
+            <th>
+                @Html.DisplayName("Action")
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
             {
-            <tr>
+            <tr id="@item.FullName.Replace(" ","-").Replace("\\","-").Replace("(","-").Replace(")","-")">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -56,11 +59,32 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FullName)
                 </td>
+                <td class="center-align">
+                    @Ajax.FormattedActionLink(string.Format("<i class='fa fa-trash-o'></i> Delete"), "delete", "filebrowser", new { filePath = "'" + @item.FullName + "'", computerName = @ViewBag.ComputerName }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "successfulFileDeletion('" + @item.FullName.Replace(@"\", @"\\") + "')", OnFailure = "failedFileDeletion('" + @item.FullName.Replace(@"\", @"\\") + "')" }, new { @class = "btn btn-default btn-danger btn-sm" })
+                </td>
             </tr>
         }
     </tbody>
 </table>
+<script type="text/javascript" src="@Url.Content("~/Scripts/shared.js")"></script>
 <script>
+
+    function successfulFileDeletion(fileName)
+    {
+        var msg = successMsg("File " + fileName + " has been deleted");
+        $('#responseMessages').append(msg);
+        var file = fileName.replace(/\s+/g, '-').replace(/\\/g, '-').replace(/\(|\)/g,'-');
+        var row = $(escapeCharacters(file));
+        $('#datatable').dataTable().fnDeleteRow(row);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+
+    function failedFileDeletion(fileName) {
+        var msg = failureMsg("Could not delete file " + fileName);
+        $('#responseMessages').append(msg);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+
     $(document).ready(function () {
         $originalVal = $('#targetDirPath').val();
         $table = $('#datatable').DataTable({
@@ -71,24 +95,24 @@
 
         $('#datatable tbody').on('click', 'tr', function () {
 
+            if ($('#retrieve-file').length != 0) {
+                $('#retrieve-file').detach();
+            }
+
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
-
-                if ($('#retrieve-file').length != 0) {
-                    $('#retrieve-file').detach();
-                }
                 $('#targetDirPath').val($originalVal);
             }
 
             else {
+
                 $table.$('tr.active').removeClass('active');
                 $(this).addClass('active');
-
                 var $attribs = $.trim($(this).find('td:eq(3)').text());
                 var $fullPath = $.trim($(this).find('td:eq(7)').text());
 
+                $('#targetDirPath').val($fullPath);
                 if ($attribs.indexOf("Directory") >= 0) {
-                    $('#targetDirPath').val($fullPath);
                     if ($('#retrieve-file').length != 0) {
                         $('#retrieve-file').detach();
                     }
@@ -98,7 +122,6 @@
                     var $computerName = $('#targetComputerName').val();
                     var $fileName = $.trim($('table > tbody > tr.active >td:eq(0)').text());
                     var $filePath = $.trim($('table > tbody > tr.active >td:eq(7)').text());
-
 
                     if ($('#retrieve-file').length == 0) {
                         $('#get-file').append("<a class=\"btn btn-default btn-success\" id=\"retrieve-file\" data-ajax=\"true\" data-ajax-method=\"GET\" data-ajax-mode=\"replace\" data-ajax-success=\"downloadFile('" + $fileName + "')\" data-ajax-update=\"#messages\" href=\"/FileExtraction/InvokeFromBrowser?computerName=" + $computerName + "&filePath=" + $filePath + "\"><i class=\"fa fa-download\"></i> Download</a>");

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="Falcon Orchestrator" Language="1033" Version="1.0.0.0" 
-           Manufacturer="CrowdStrike" UpgradeCode="9279b740-8419-45c4-9538-6a45f8e949c7">
+  <Product Id="*" Name="Falcon Orchestrator" Language="1033" Version="1.1.0.0" 
+           Manufacturer="CrowdStrike" UpgradeCode="9279b740-8419-45c4-9538-6a45f8e949c6">
     
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <Media Id="1" Cabinet="FalconOrchestrator.cab" EmbedCab="yes" />
     <Icon Id="icon.ico" SourceFile="icon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />

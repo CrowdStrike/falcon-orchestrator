@@ -35,7 +35,7 @@ namespace FalconOrchestratorWeb.Areas.Forensics.Models
         public string Directory { get; set; }
     }
 
-    public class SoftwareInventoryViewModel
+    public class AssetViewModel
     {
         [Required(ErrorMessage = "A hostname or IP address is required")]
         public string ComputerName { get; set; }
