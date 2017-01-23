@@ -16,7 +16,7 @@ You can also join the project chat room to discuss in greater detail, click [![S
 
 # Getting Started
 
-Please refer to the [Wiki](https://github.com/CrowdStrike/falcon-orchestrator/wiki) page for instructions on installing and configuring the application.  You can download the installer through the [release](https://github.com/CrowdStrike/falcon-orchestrator/releases/download/v1.0.0/FalconOrchestratorSetup.msi) page.
+Please refer to the [Wiki](https://github.com/CrowdStrike/falcon-orchestrator/wiki) page for instructions on installing and configuring the application.  You can download the installer through the [release](https://github.com/CrowdStrike/falcon-orchestrator/releases) page.
 
 # Development
 
