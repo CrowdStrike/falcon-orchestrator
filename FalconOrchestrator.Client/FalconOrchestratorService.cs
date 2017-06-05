@@ -71,9 +71,10 @@ namespace FalconOrchestrator.Client
         {
             try
             {
+                string randomized = Guid.NewGuid().ToString().Substring(0, 5);
                 AppConfiguration appConfig = new AppConfiguration(ConfigurationManager.AppSettings["CryptoKey"]);
                 Authentication config = new Authentication(
-                    String.Concat(appConfig.FALCON_STREAM_URL, "?appId=falcon_orchestrator"),
+                    String.Concat(appConfig.FALCON_STREAM_URL, "?appId=falcon_orchestrator_", randomized),
                     appConfig.FALCON_STREAM_UUID,
                     appConfig.FALCON_STREAM_KEY);
 
@@ -82,7 +83,7 @@ namespace FalconOrchestrator.Client
             }
             catch (Exception e)
             {
-                log.Fatal("An unhandled error occured",e);
+                log.Fatal("An unhandled error occured", e);
                 Environment.Exit(1);
             }
         }
@@ -109,15 +110,17 @@ namespace FalconOrchestrator.Client
                                 continue;
                             }
 
+                            //This should be removed afterwards
                             model.Save();
                         }
 
-                        catch (System.Data.Entity.Validation.DbEntityValidationException)
+                        catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                         {
-                            log.Fatal("Error saving detection event to database");
-                            log.Fatal(JsonConvert.SerializeObject(data, Formatting.Indented));
+                            log.Fatal("Error saving detection event to database: "+ ex.Message);
+                            log.Fatal(JsonConvert.SerializeObject(line, Formatting.Indented));
                             Environment.Exit(1);
                         }
+
 
                         catch (NotSupportedException)
                         {
@@ -125,7 +128,7 @@ namespace FalconOrchestrator.Client
                         }
                     }
                 }
+                }
             }
         }
-    }
 }
