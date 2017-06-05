@@ -96,7 +96,7 @@ namespace FalconOrchestrator.Client
 
         public override void Execute()
         {
-            if (model.Data.Severity >= Convert.ToInt32(config.RULE_NOTIFICATION_THRESHOLD))
+            if (model.Data.Severity >= Convert.ToInt32(config.RULE_NOTIFICATION_THRESHOLD) && model.Data.StatusId != 7)
             {
                 log.Debug("Notification rule is enabled and severity of " + model.Data.SeverityName + " is above threshold, attempting to send email");
                 try
@@ -223,7 +223,7 @@ namespace FalconOrchestrator.Client
                 }
                 else
                 {
-                    log.Debug("AD Lookup rule enabled, account " + model.Data.UserName + " does not exists in database, attemping LDAP query for metadata");
+                    log.Debug("AD Lookup rule enabled, account " + model.Data.UserName + " does not exist in LDAP database");
                     LdapQuery();
 
                 }
