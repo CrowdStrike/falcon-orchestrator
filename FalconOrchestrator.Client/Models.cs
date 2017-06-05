@@ -21,6 +21,10 @@ using System.Linq;
 using Newtonsoft.Json;
 using FalconOrchestrator.DAL;
 using log4net;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using FalconOrchestrator.IOC;
+using FalconOrchestrator.LDAP;
 
 namespace FalconOrchestrator.Client
 {
@@ -77,6 +81,18 @@ namespace FalconOrchestrator.Client
                 db.SaveToDatabase(Metadata.CustomerIdString, Metadata.Offset);
                 log.Debug("[" + Metadata.Offset + "] Detection event saved to database");
             }
+
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var errorMessages = ex.EntityValidationErrors
+                .SelectMany(x => x.ValidationErrors)
+                .Select(x => x.ErrorMessage);
+
+                var fullErrorMessage = string.Join("; ", errorMessages);
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+            }
+
             catch (Exception e)
             {
                 log.Fatal("[" + Metadata.Offset + "] Error occured while trying to save detection event to database", e);
@@ -133,6 +149,18 @@ namespace FalconOrchestrator.Client
                     log.Debug("[" + Metadata.Offset + "] Authentication audit event saved to database");
                 }
             }
+
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var errorMessages = ex.EntityValidationErrors
+                .SelectMany(x => x.ValidationErrors)
+                .Select(x => x.ErrorMessage);
+
+                var fullErrorMessage = string.Join("; ", errorMessages);
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+            }
+
             catch (Exception e)
             {
                 log.Fatal("[" + Metadata.Offset + "] Error occured while trying to save authentication activity audit event to database", e);
@@ -187,6 +215,18 @@ namespace FalconOrchestrator.Client
                     log.Debug("[" + Metadata.Offset + "] User activity audit event saved to database");
                 }
             }
+
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var errorMessages = ex.EntityValidationErrors
+                .SelectMany(x => x.ValidationErrors)
+                .Select(x => x.ErrorMessage);
+
+                var fullErrorMessage = string.Join("; ", errorMessages);
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+            }
+
             catch (Exception e)
             {
                 log.Fatal("[" + Metadata.Offset + "] Error occured while trying to save user activity audit event to database", e);
@@ -295,6 +335,8 @@ namespace FalconOrchestrator.Client
 
     class NetworkAccessesModel
     {
+        protected readonly ILog log = LogManager.GetLogger(typeof(NetworkAccessesModel));
+
         [JsonProperty("AccessTimestamp")]
         public string Timestamp { get; set; }
         public int AccessType { get; set; }
@@ -309,14 +351,24 @@ namespace FalconOrchestrator.Client
         {
             get
             {
-                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                try
+                {
+                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                    return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    log.Warn("Malformed network access timestamp, failing over to current time");
+                    return DateTime.UtcNow;
+                }
             }
         }
     }
 
     class DnsRequestsModel
     {
+        protected readonly ILog log = LogManager.GetLogger(typeof(DnsRequestsModel));
+
         [JsonProperty("LoadTime")]
         public string Timestamp { get; set; }
         public bool CausedDetect { get; set; }
@@ -327,14 +379,24 @@ namespace FalconOrchestrator.Client
         {
             get
             {
-                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                try
+                {
+                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                    return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    log.Warn("Malformed DNS timestamp, failing over to current time");
+                    return DateTime.UtcNow;
+                }
             }
         }
     }
 
     class DocumentsAccessedModel
     {
+        protected readonly ILog log = LogManager.GetLogger(typeof(DocumentsAccessedModel));
+
         public string Timestamp { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
@@ -342,14 +404,24 @@ namespace FalconOrchestrator.Client
         {
             get
             {
-                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                try
+                {
+                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                    return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    log.Warn("Malformed Document access timestamp, failing over to current time");
+                    return DateTime.UtcNow;
+                }
             }
         }
     }
 
     class ExecutableWrittenModel
     {
+        protected readonly ILog log = LogManager.GetLogger(typeof(ExecutableWrittenModel));
+
         public string Timestamp { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
@@ -357,8 +429,16 @@ namespace FalconOrchestrator.Client
         {
             get
             {
-                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                try
+                {
+                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                    return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    log.Warn("Malformed executable written timestamp, failing over to current time");
+                    return DateTime.UtcNow;
+                }
             }
         }
     }
@@ -372,6 +452,8 @@ namespace FalconOrchestrator.Client
 
     class AuditEvent
     {
+        protected readonly ILog log = LogManager.GetLogger(typeof(AuditEvent));
+
         public string UserId { get; set; }
         public string UserIp { get; set; }
         public string OperationName { get; set; }
@@ -383,8 +465,16 @@ namespace FalconOrchestrator.Client
         {
             get
             {
-                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                try
+                {
+                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                    return dateTime.AddSeconds(Convert.ToDouble(Timestamp)).ToUniversalTime();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    log.Warn("Malformed audit event timestamp, failing over to current time");
+                    return DateTime.UtcNow;
+                }
             }
         }
         public AuditKeyValues[] AuditKeyValues { get; set; }
