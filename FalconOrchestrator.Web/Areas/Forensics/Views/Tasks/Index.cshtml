@@ -1,0 +1,27 @@
+﻿@model FalconOrchestratorWeb.Areas.Forensics.Models.AssetViewModel
+@using (Ajax.BeginForm("List", "Scheduled Tasks", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "scheduled-tasks" }))
+{
+    <div class="container">
+        <h1>Scheduled Tasks</h1>
+        <br />
+        <p>
+            Query a system below to list and manage active/unactive scheduled tasks. Exercise caution when terminating processes.  Killing critical scheduled tasks can result in crashing the target system.
+        </p>
+        <hr />
+        <div id="responseMessages"></div>
+        <div class="well">
+            <div class="form">
+                <div class="form-group">
+                    @Html.Label("Computer", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.ComputerName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ComputerName)
+                </div>
+                <button type="submit" class="btn btn-default btn-success">
+                    <i class="fa fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row" id="scheduled-tasks"></div>
+    </div>
+}

@@ -21,10 +21,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using FalconOrchestrator.DAL;
 using log4net;
-using System.Data.Entity;
 using System.Data.Entity.Validation;
-using FalconOrchestrator.IOC;
-using FalconOrchestrator.LDAP;
 
 namespace FalconOrchestrator.Client
 {
