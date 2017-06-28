@@ -51,7 +51,22 @@ namespace FalconOrchestrator.Forensics
             }
         }
     }
-
+    public class Tasks
+    {
+        public string NextRunTime { get; set; }
+        public string Author { get; set; }
+        public string Trigger { get; set; }
+        public string State { get; set; }
+        public string UserId { get; set; }
+        public string ComputerName { get; set; }
+        public string Name { get; set; }
+        public string LastRunTime { get; set; }
+        public string LastTaskResult { get; set; }
+        public string Description { get; set; }
+        public string NumberofMissedRuns { get; set; }
+        public string Enabled { get; set; }
+        public string Path { get; set; }
+    }
 
     public class InstalledSoftware
     {

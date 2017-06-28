@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TaskManagement.cs" />
     <Compile Include="FileSystemBrowser.cs" />
     <Compile Include="FileExtraction.cs" />
     <Compile Include="Memory.cs" />
