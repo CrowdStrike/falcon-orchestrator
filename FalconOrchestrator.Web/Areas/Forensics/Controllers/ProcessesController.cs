@@ -64,8 +64,6 @@ namespace FalconOrchestratorWeb.Areas.Forensics.Controllers
             }
             catch (Exception e)
             {
-                //Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                //return Content(e.Message);
                 throw new HttpException(500, e.Message);
             }
         }

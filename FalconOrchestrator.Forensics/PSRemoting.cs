@@ -94,6 +94,7 @@ namespace FalconOrchestrator.Forensics
                 {
                     string errorOutput = null;
                     ps.Streams.Error.ToList().ForEach(x => errorOutput += x.ToString());
+                    runSpace.Close();
                     throw new Exception(errorOutput);
                 }
 

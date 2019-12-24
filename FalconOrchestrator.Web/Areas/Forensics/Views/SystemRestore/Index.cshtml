@@ -1,0 +1,39 @@
+﻿@model FalconOrchestratorWeb.Areas.Forensics.Models.AssetViewModel
+@using (Ajax.BeginForm("RestorePoints", "SystemRestore", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "restore-points" }))
+{
+    <div class="container">
+        <h1>System Restore</h1>
+        <br />
+        <p>
+            When a host is compromised, a common remedial action is to roll back the system to a
+            point in time prior to the incident occuring. This can be achieved using the System Restore module.
+            To begin, specify a target hostname or IP address. From there you will need to select a restore point from the
+            provided list. You can then choose to restore the hosts configuration settings and/or to recover data that was backed up
+            as part of the restore point.  
+           
+        </p>
+
+        <hr />
+        <div id="responseMessages"></div>
+        <div class="well">
+            <div class="form-horizontal">
+                <div class="row">
+                    @Html.Label("Computer", new { @class = "control-label col-2" })
+                    <div class="col col-4">
+                        @Html.TextBoxFor(x => x.ComputerName, new { @class = "form-control", @id = "targetComputerName" })
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default btn-success">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                        <span id="execute-restore"></span>
+                        <span id="recover-data"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div id="restore-points"></div>
+        <div id="shadow-storage"></div>
+    </div>
+}
